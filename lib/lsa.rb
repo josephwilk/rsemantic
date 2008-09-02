@@ -52,7 +52,6 @@ class LSA
 
     if dimensions <= rows: #Its a valid reduction
 
-      #Sigma comes out as a list rather than a matrix
       u, sigma, vt = @matrix.singular_value_decomposition
 
       #Dimension reduction, build SIGMA'
@@ -89,8 +88,8 @@ class LSA
     @matrix.to_a
   end
 
-  #Find how many documents a term occurs in
   private
+  #Find how many documents a term occurs in
   def get_term_document_occurences(col)
     term_document_occurences=0
 
