@@ -56,17 +56,16 @@ describe LSA do
     
     it "should calculate term frequency" do
       lsa = LSA.new([[1,2]])
-      
-      lsa.should_receive(:term_frequency).with(1.0, 3.0).and_return(1.0)
-      lsa.should_receive(:term_frequency).with(2.0, 3.0).and_return(1.0)
+      Frequency.should_receive(:term_frequency).with(1.0, 3.0).and_return(1.0)
+      Frequency.should_receive(:term_frequency).with(2.0, 3.0).and_return(1.0)
 
       lsa.tf_idf_transform!
     end
 
     it "should calculate inverse document frequency" do
       lsa = LSA.new([[1,0],[1,1]])
-      lsa.should_receive(:inverse_document_frequency).with(2, 2).twice.and_return(1.0)  
-      lsa.should_receive(:inverse_document_frequency).with(2, 1).and_return(1.0)    
+      Frequency.should_receive(:inverse_document_frequency).with(2, 2).twice.and_return(1.0)  
+      Frequency.should_receive(:inverse_document_frequency).with(2, 1).and_return(1.0)    
             
       lsa.tf_idf_transform!
     end

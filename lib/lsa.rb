@@ -1,5 +1,7 @@
 require 'linalg'
 
+require File.dirname(__FILE__) + '/frequency'
+
 # Latent Semantic Analysis(LSA).
 # Apply transforms to a document-term matrix to bring out latent relationships.
 # These are found by analysing relationships between the documents and the terms they
@@ -30,25 +32,19 @@ class LSA
           
           number_of_documents_with_term[column_index] ||= get_term_document_occurences(column_index)
                     
-          @matrix[row_index, column_index] =  term_frequency(term_weight.to_f, document_word_total) * inverse_document_frequency(number_of_documents, number_of_documents_with_term[column_index])
+          tf = Frequency::term_frequency(term_weight.to_f, document_word_total)
+          idf = Frequency::inverse_document_frequency(number_of_documents, number_of_documents_with_term[column_index])
+          @matrix[row_index, column_index] =  tf * idf
         end
       end
     end
-  end
-
-  def term_frequency(term_weight, document_word_total)
-    term_weight / document_word_total
-  end
-
-  def inverse_document_frequency(number_of_documents, number_of_documents_with_term)
-    Math.log((number_of_documents / number_of_documents_with_term.to_f).abs)
   end
 
   # Calculate SVD of objects matrix: U . SIGMA . VT = MATRIX
   # Reduce the dimension of sigma by specified factor producing sigma'.
   # Then dot product the matrices:  U . SIGMA' . VT = MATRIX'
   def lsa_transform!(dimensions=1)
-    rows,cols= @matrix.dimensions
+    rows = @matrix.num_rows
 
     if dimensions <= rows: #Its a valid reduction
 

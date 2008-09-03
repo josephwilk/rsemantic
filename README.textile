@@ -2,14 +2,17 @@ h1. SemanticRb
 
 A collection of projects in ruby looking at semantics. Mostly orientated around search.
 
-Complete:
+h2. Complete:
+
 * Latent semantic analysis - http://www.joesniff.co.uk/ruby/latent-semantic-analysis-in-ruby.html
 
-In progress:
+h2. In progress:
+
 * Probabilitic Latent semantic analysis.
 * Latent dirchlet allocation
 
-Dependencies
+h2. Dependencies
+
 * linalg - "http://rubyforge.org/projects/linalg/":http://rubyforge.org/projects/linalg/
 ** LAPACK
 *** Building on Mac OS X "http://www.commonmediainc.com/2008/03/24/building-lapack-and-rubys-linalg-on-mac-os-x/":http://www.commonmediainc.com/2008/03/24/building-lapack-and-rubys-linalg-on-mac-os-x/
