@@ -129,10 +129,5 @@ describe LSA do
     
     main()
   end
-  
-  it "should run example when lsa is directly run" do
-    out = `ruby #{File.dirname(__FILE__)}/../lib/lsa.rb`
-    out.should_not be_empty
-  end
 
 end

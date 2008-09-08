@@ -111,19 +111,18 @@ def main
 
   #Create
   lsa = LSA.new(matrix)
+  puts "Inital matrix"
   puts lsa
   puts
 
   #Prepare
   lsa.tf_idf_transform!
+  puts "Applying tf-idf transform"
   puts lsa
   puts
 
   #Perform
   lsa.lsa_transform!
+  puts "Applying lsa transform"
   puts lsa
-end
-
-if $0 == __FILE__
-  main
 end

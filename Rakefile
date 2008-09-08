@@ -30,6 +30,12 @@ Spec::Rake::SpecTask.new do |t|
 end
 
 RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
-  t.threshold = 98.6 # Make sure you have rcov 0.9 or higher!
+  t.threshold = 100 # Make sure you have rcov 0.9 or higher!
   t.index_html = 'coverage/index.html'
+end
+
+desc "run main example"
+task :example do
+  require 'lib/lsa'
+  main
 end
