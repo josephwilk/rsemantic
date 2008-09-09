@@ -34,8 +34,8 @@ RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
   t.index_html = 'coverage/index.html'
 end
 
-desc "run main example"
+desc "run main LSA example"
 task :example do
-  require 'lib/lsa'
-  main
+  require 'lib/semantic'
+  Semantic::main
 end
