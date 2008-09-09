@@ -4,7 +4,7 @@ A collection of projects in ruby looking at semantics. Mostly orientated around 
 
 h2. Complete:
 
-* Latent semantic analysis - http://www.joesniff.co.uk/ruby/latent-semantic-analysis-in-ruby.html
+* Latent semantic analysis
 
 h2. In progress:
 
