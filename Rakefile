@@ -30,23 +30,29 @@ Spec::Rake::SpecTask.new do |t|
 end
 
 RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
-  t.threshold = 100 # Make sure you have rcov 0.9 or higher!
+  t.threshold = 93.7 # Make sure you have rcov 0.9 or higher!
   t.index_html = 'coverage/index.html'
 end
 
 namespace :example do
 
+  require 'lib/semantic'
+
   desc "run main LSA example"
   task :lsa do
-    require 'lib/semantic'
     Semantic::main
   end
 
   desc "run main Vector space example"
   task :vector_space do
-    require 'lib/semantic'
-    puts "PENDING"
-    # Semantic::VectorSpace::main
+    Semantic::Search::main
   end
   
+  desc "full"
+  task :name do
+    documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
+    #TODO: active LSA in search
+    # search = Semantic::Search(documents, :with => 'LSA')
+  end
+    
 end
