@@ -31,8 +31,17 @@ module Semantic
 
       vector_space = Search.new(documents)
   
+      puts "Documents:"
+      documents.each_with_index { |document, index| puts "#{index}: #{document}"  }
+      puts
+      
+      puts "Documents related to first document: #{documents[0]}"
       puts vector_space.related(0)
+      puts
+      
+      puts "Searching for the word cat:"
       puts vector_space.search(["cat"])
+      puts
     end
   end
 end
