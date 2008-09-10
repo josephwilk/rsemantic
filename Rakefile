@@ -8,9 +8,9 @@ begin
   require 'spec/rake/spectask'
 rescue LoadError
   puts <<-EOS
-To use rspec for testing you must install rspec gem:
-    gem install rspec
-EOS
+  To use rspec for testing you must install rspec gem:
+  gem install rspec
+  EOS
   exit(0)
 end
 
@@ -34,8 +34,19 @@ RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
   t.index_html = 'coverage/index.html'
 end
 
-desc "run main LSA example"
-task :example do
-  require 'lib/semantic'
-  Semantic::main
+namespace :example do
+
+  desc "run main LSA example"
+  task :lsa do
+    require 'lib/semantic'
+    Semantic::main
+  end
+
+  desc "run main Vector space example"
+  task :vector_space do
+    require 'lib/semantic'
+    puts "PENDING"
+    # Semantic::VectorSpace::main
+  end
+  
 end
