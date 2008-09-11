@@ -15,7 +15,6 @@ describe Semantic::Search do
   
   it "should build the vector space" do
     Semantic::VectorSpace::Builder.stub!(:new).and_return(mock_builder)
-
     mock_builder.should_receive(:build).with(['test']).and_return(mock_vector_space)
 
     Semantic::Search.new(['test'])
@@ -25,7 +24,6 @@ describe Semantic::Search do
     mock_vector_space.stub!(:collect)
     Semantic::VectorSpace::Builder.stub!(:new).and_return(mock_builder)
     mock_builder.stub!(:build).and_return(mock_vector_space)
-
     mock_builder.should_receive(:build_query_vector).with("cat")
         
     vector_search = Semantic::Search.new(documents)
