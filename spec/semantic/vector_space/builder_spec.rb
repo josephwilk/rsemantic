@@ -2,16 +2,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Semantic::VectorSpace::Builder do
 
-  before(:each) do
-    stop_file = mock("file")
-    stop_file.stub!(:read).and_return("the mouse")
-  
-    parser = stub("parser")
-  
-    Semantic::Parser.stub!(:new).and_return(parser)
-    File.stub!(:open).and_yield(stop_file)
-  end
-  
   it "should tokenise the string documents" do
     parser = mock('parser')
     parser.stub!(:remove_stop_words).and_return(['mouse','trap'])
