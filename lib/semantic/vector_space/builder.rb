@@ -1,20 +1,35 @@
 module Semantic
-
   module VectorSpace
-
     #A algebraic model for representing text documents as vectors of identifiers.
     #A document is represented as a vector. Each dimension of the vector corresponds to a
     #separate term. If a term occurs in the document, then the value in the vector is non-zero.
     class Builder
 
-      def initialize
+      def initialize(options={})
         @parser = Parser.new
+        @options = options
       end
 
       #Create the vector space for the passed document strings
       def build(documents)
         @vector_keyword_index = get_vector_keyword_index(documents)
-        documents.map {|document| build_vector(document) }
+
+        vector_space = documents.map {|document| build_vector(document) }
+
+        log("Initial matrix")        
+        document_matrix = Linalg::DMatrix.join_rows(vector_space)
+        log(document_matrix)
+        
+        #Transform
+        log("Applying tf-idf transform")
+        document_matrix = Transform::TFIDF.transform(document_matrix)
+        log(document_matrix)
+        
+        log("Applying lsa transform")
+        document_matrix = Transform::LSA.transform(document_matrix)
+        log(document_matrix)
+
+        document_matrix
       end
 
       #Create the keyword associated to the position of the elements within the document vectors
@@ -52,6 +67,11 @@ module Semantic
       #Convert query string into a term vector
       def build_query_vector(termList)
         build_vector(termList.join(" "))
+      end
+
+      private
+      def log(string)
+        puts string if @options[:verbose]
       end
 
     end

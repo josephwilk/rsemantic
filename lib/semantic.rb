@@ -3,12 +3,12 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 require "semantic/vector_space"
 
-require 'semantic/lsa'
 require 'semantic/frequency'
 require "semantic/compare"
 require "semantic/parser"
 require "semantic/search"
-
+require "semantic/transform"
+require "semantic/format"
 
 
 require 'rubygems'

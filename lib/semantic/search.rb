@@ -10,40 +10,30 @@ module Semantic
 
   class Search
 
-    def initialize(documents)
-      @builder = VectorSpace::Builder.new
+    def initialize(documents, opts={})
+      @builder = VectorSpace::Builder.new(opts)
+
+      #Map documents to vector space
       @document_vectors = @builder.build(documents)
     end
   
     def related(documentId)
-      ratings = @document_vectors.collect {|document_vector| Compare.cosine(@document_vectors[documentId], document_vector) }
+      ratings = []
+      for index in (0...@document_vectors.nrow)
+        ratings << Compare.cosine(@document_vectors.row(documentId), @document_vectors.row(index))
+      end
+      ratings
     end
 
     def search(searchList)
-      queryVector = @builder.build_query_vector(searchList)
-      ratings = @document_vectors.collect {|document_vector| Compare.cosine(queryVector, document_vector)}
+      ratings = []
+      query_vector = @builder.build_query_vector(searchList)
+      
+      for index in (0...@document_vectors.nrow)
+        ratings << Compare.cosine(query_vector, @document_vectors.row(index))
+      end
+      ratings
     end
-
-  class << self
-    def main
-      #test data
-      documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
-
-      vector_space = Search.new(documents)
   
-      puts "Documents:"
-      documents.each_with_index { |document, index| puts "#{index}: #{document}"  }
-      puts
-      
-      puts "Documents related to first document: #{documents[0]}"
-      puts vector_space.related(0)
-      puts
-      
-      puts "Searching for the word cat:"
-      puts vector_space.search(["cat"])
-      puts
-    end
   end
 end
-end
-# Semantic::main

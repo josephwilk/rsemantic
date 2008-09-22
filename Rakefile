@@ -30,7 +30,7 @@ Spec::Rake::SpecTask.new do |t|
 end
 
 RCov::VerifyTask.new(:verify_rcov => :spec) do |t|
-  t.threshold = 93.7 # Make sure you have rcov 0.9 or higher!
+  t.threshold = 99.7 # Make sure you have rcov 0.9 or higher!
   t.index_html = 'coverage/index.html'
 end
 
@@ -38,21 +38,35 @@ namespace :example do
 
   require 'lib/semantic'
 
+  documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
+
   desc "run main LSA example"
   task :lsa do
-    Semantic::main
+    search = Semantic::Search.new(documents, :verbose => true)
   end
 
   desc "run main Vector space example"
   task :vector_space do
-    Semantic::Search::main
+    search = Semantic::Search.new(documents)
+
+    puts "Documents:"
+    documents.each_with_index { |document, index| puts "#{index}: #{document}"  }
+    puts
+
+    puts "Documents related to first document: #{documents[0]}"
+    puts search.related(0)
+    puts
+
+    puts "Searching for the word cat:"
+    puts search.search(["cat"])
+    puts
   end
-  
+
   desc "full"
-  task :name do
+  task :full do
     documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
     #TODO: active LSA in search
     # search = Semantic::Search(documents, :with => 'LSA')
   end
-    
+
 end

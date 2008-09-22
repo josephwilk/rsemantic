@@ -22,4 +22,11 @@ describe Semantic::VectorSpace::Builder do
     builder.build(['the mouse trap'])
   end
 
+  it "should build a vector from query string" do
+    builder = Semantic::VectorSpace::Builder.new
+    builder.should_receive(:build_vector).with("query string")
+    
+    builder.build_query_vector(["query","string"])
+  end
+
 end
