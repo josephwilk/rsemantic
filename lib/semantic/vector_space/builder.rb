@@ -28,8 +28,9 @@ module Semantic
             log("Applying #{transform} transform")
             document_matrix = transform_class.send(:transform, document_matrix) if transform_class.respond_to?(:transform)
             log(document_matrix)
-          rescue 
+          rescue Exception => e
             puts("Error: Cannot perform transform: #{transform}")
+            puts(e)
           end
         end
         document_matrix
