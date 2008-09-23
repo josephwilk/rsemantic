@@ -8,6 +8,7 @@ module Semantic
       def initialize(options={})
         @parser = Parser.new
         @options = options
+        @transforms = options[:transforms] || [:TFIDF, :LSA]
       end
 
       #Create the vector space for the passed document strings
@@ -21,14 +22,16 @@ module Semantic
         log(document_matrix)
         
         #Transform
-        log("Applying tf-idf transform")
-        document_matrix = Transform::TFIDF.transform(document_matrix)
-        log(document_matrix)
-        
-        log("Applying lsa transform")
-        document_matrix = Transform::LSA.transform(document_matrix)
-        log(document_matrix)
-
+        @transforms.each do |transform|
+          begin
+            transform_class = Semantic::Transform.const_get(transform)
+            log("Applying #{transform} transform")
+            document_matrix = transform_class.send(:transform, document_matrix) if transform_class.respond_to?(:transform)
+            log(document_matrix)
+          rescue 
+            puts("Error: Cannot perform transform: #{transform}")
+          end
+        end
         document_matrix
       end
 
@@ -56,7 +59,6 @@ module Semantic
       #Create the keyword associated to the position of the elements within the document vectors
       #@pre: unique(vectorIndex)
       def build_vector(word_string)
-        #Initialises vector with 0's
         vector = Linalg::DMatrix.new(1, @vector_keyword_index.length)
         word_list = @parser.tokenise(word_string)
         word_list = @parser.remove_stop_words(word_list)
