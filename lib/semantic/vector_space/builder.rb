@@ -14,26 +14,28 @@ module Semantic
       #Create the vector space for the passed document strings
       def build(documents)
         @vector_keyword_index = get_vector_keyword_index(documents)
-
         vector_space = documents.map {|document| build_vector(document) }
-
-        log("Initial matrix")        
         document_matrix = Linalg::DMatrix.join_rows(vector_space)
+	
+	log("Initial matrix")  
         log(document_matrix)
         
-        #Transform
+	transform(document_matrix)
+      end
+
+      def transform(matrix)
         @transforms.each do |transform|
           begin
             transform_class = Semantic::Transform.const_get(transform)
             log("Applying #{transform} transform")
-            document_matrix = transform_class.send(:transform, document_matrix) if transform_class.respond_to?(:transform)
-            log(document_matrix)
+            matrix = transform_class.send(:transform, matrix) if transform_class.respond_to?(:transform)
+            log(matrix)
           rescue Exception => e
             puts("Error: Cannot perform transform: #{transform}")
             puts(e)
           end
         end
-        document_matrix
+        matrix
       end
 
       #Create the keyword associated to the position of the elements within the document vectors
