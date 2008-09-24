@@ -11,7 +11,7 @@ module Semantic
     def related(documentId)
       ratings = []
       for index in (0...@document_vectors.nrow)
-        ratings << Compare.cosine(@document_vectors.row(documentId), @document_vectors.row(index))
+        ratings << Compare.similarity(@document_vectors.row(documentId), @document_vectors.row(index))
       end
       ratings
     end
@@ -21,7 +21,7 @@ module Semantic
       query_vector = @builder.build_query_vector(searchList)
       
       for index in (0...@document_vectors.nrow)
-        ratings << Compare.cosine(query_vector, @document_vectors.row(index))
+        ratings << Compare.similarity(query_vector, @document_vectors.row(index))
       end
       ratings
     end
