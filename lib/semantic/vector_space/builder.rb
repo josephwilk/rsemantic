@@ -17,10 +17,10 @@ module Semantic
         vector_space = documents.map {|document| build_vector(document) }
         document_matrix = Linalg::DMatrix.join_rows(vector_space)
 	
-	log("Initial matrix")  
+        log("Initial matrix")  
         log(document_matrix)
         
-	transform(document_matrix)
+        transform(document_matrix)
       end
 
       def transform(matrix)
