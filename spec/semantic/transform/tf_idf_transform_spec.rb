@@ -37,13 +37,5 @@ describe Semantic::Transform::TFIDF do
       Semantic::Transform::TFIDF.transform matrix([[1,0],[1,1]])
     end
 
-    # it "should transform LSA matrix" do
-    #   lsa = Semantic::Transform::TFIDF.new()
-    #   out = Semantic::Transform::TFIDF.transform(tiny_matrix)
-    #   # Semantic::Transform::TFIDF.to_a.should == [[0.0, 0.693147180559945, 0.0], [0.346573590279973, 0.0, 0.346573590279973]]
-    #   # <=>
-    #   Semantic::Transform::TFIDF.to_s.should == "[ +0.00 +0.69 +0.00 ]\n[ +0.35 +0.00 +0.35 ]\n"
-    # end
-
   end
 end
