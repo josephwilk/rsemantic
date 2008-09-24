@@ -37,5 +37,11 @@ describe Semantic::Transform::TFIDF do
       Semantic::Transform::TFIDF.transform matrix([[1,0],[1,1]])
     end
 
+    it "should calculate term frequency * inverse document freuency" do
+      transformed_matrix = Semantic::Transform::TFIDF.transform matrix([[1,0],[1,1]])
+
+      transformed_matrix.to_s.should == Linalg::DMatrix.rows([[0, 0],[0, 0.346574]]).to_s
+    end
+
   end
 end
