@@ -1,13 +1,4 @@
-#http://rubyforge.org/projects/stemmer/
-require 'rubygems'
-require 'stemmer'
-require 'linalg'
-
-require File.dirname(__FILE__) + "/compare"
-require File.dirname(__FILE__) + "/parser"
-
 module Semantic
-
   class Search
 
     def initialize(documents, opts={})

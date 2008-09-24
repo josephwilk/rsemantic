@@ -9,9 +9,10 @@ require "semantic/parser"
 require "semantic/search"
 require "semantic/transform"
 require "semantic/format"
-
-
+  
 require 'rubygems'
-#http://tartarus.org/~martin/PorterStemmer/python.txt
-#A processor for removing the commoner morphological and inflexional endings from words in English
 require 'linalg'
+#http://rubyforge.org/projects/stemmer/
+#A processor for removing the commoner morphological and inflexional endings from words in English
+require 'stemmer'
+

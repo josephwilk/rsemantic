@@ -3,6 +3,11 @@ module Semantic
   class Compare
 
     class << self
+      
+      def similarity(vector1, vector2)
+        cosine(vector1, vector2)
+      end
+      
       #Related documents j and q are in the concept space by comparing the vectors :
       #cosine  = ( V1 * V2 ) / ||V1|| x ||V2||
       def cosine(vector1, vector2)
