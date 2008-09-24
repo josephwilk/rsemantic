@@ -62,11 +62,4 @@ namespace :example do
     puts
   end
 
-  desc "full"
-  task :full do
-    documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
-    #TODO: active LSA in search
-    # search = Semantic::Search(documents, :with => 'LSA')
-  end
-
 end
