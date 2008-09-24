@@ -14,8 +14,8 @@ module Semantic
       #Create the vector space for the passed document strings
       def build(documents)
         @vector_keyword_index = get_vector_keyword_index(documents)
-        vector_space = documents.map {|document| build_vector(document) }
-        document_matrix = Linalg::DMatrix.join_rows(vector_space)
+        document_vectors = documents.map {|document| build_vector(document) }
+        document_matrix = Linalg::DMatrix.join_rows(document_vectors)
 	
         log("Initial matrix")  
         log(document_matrix)
