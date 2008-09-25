@@ -30,7 +30,7 @@ module Semantic
       private
       def build_document_matrix(documents)
         @vector_keyword_index = get_vector_keyword_index(documents)
-        document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector_from_document(document, 0)}
+        document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector_from_document(document, document_id)}
         document_matrix = Linalg::DMatrix.join_rows(document_vectors)
       end
 
@@ -72,7 +72,7 @@ module Semantic
       end
 
       def build_vector_from_document(document_string, document_id)
-        word_list = @parsed_document_cache[document_id]
+        word_list = @parsed_document_cache[document_id] || tokenise_and_filter(document_string)
         build_vector(word_list)
       end
 
