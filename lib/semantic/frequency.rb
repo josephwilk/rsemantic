@@ -12,6 +12,6 @@ module Semantic
       end
 
     end
-
+    
   end
 end

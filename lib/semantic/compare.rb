@@ -1,5 +1,4 @@
 module Semantic
-
   class Compare
 
     class << self
@@ -17,8 +16,6 @@ module Semantic
       end
 
     end
-
+    
   end
-
-
 end
