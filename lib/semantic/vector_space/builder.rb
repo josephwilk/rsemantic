@@ -7,8 +7,8 @@ module Semantic
 
       def initialize(options={})
         @parser = Parser.new
+        @matrix_transformer = MatrixTransformer.new(options)
         @options = options
-        @transforms = options[:transforms] || [:TFIDF, :LSA]
         @parsed_document_cache = []
       end
 
@@ -19,7 +19,7 @@ module Semantic
         log("Initial matrix")  
         log(document_matrix)
         
-        transform(document_matrix)
+        @matrix_transformer.apply_transforms(document_matrix)
       end
 
       #Convert query string into a term vector
@@ -29,32 +29,15 @@ module Semantic
 
       private
       def build_document_matrix(documents)
-        @vector_keyword_index = get_vector_keyword_index(documents)
+        @vector_keyword_index = build_vector_keyword_index(documents)
         document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector_from_document(document, document_id)}
         document_matrix = Linalg::DMatrix.join_rows(document_vectors)
       end
 
-      def transform(matrix)
-        @transforms.each do |transform|
-          begin
-            transform_class = Semantic::Transform.const_get(transform)
-            log("Applying #{transform} transform")
-            matrix = transform_class.send(:transform, matrix) if transform_class.respond_to?(:transform)
-            log(matrix)
-          rescue Exception => e
-            puts("Error: Cannot perform transform: #{transform}")
-            puts(e)
-          end
-        end
-        matrix
-      end
-
       #Create the keyword associated to the position of the elements within the document vectors
-      def get_vector_keyword_index(document_list)
-        #Mapped documents into a single word string
-        # vocabulary_string = document_list.join(" ")
+      def build_vector_keyword_index(document_list)
         document_list.each_with_index do |document, index|
-          @parsed_document_cache[index] = tokenise_and_filter(document)
+          @parsed_document_cache[index] = @parser.tokenise_and_filter(document)
         end
 
         vocabulary_list = @parsed_document_cache.inject([]) { |parsed_document, vocabulary_list| vocabulary_list + parsed_document  }
@@ -72,12 +55,12 @@ module Semantic
       end
 
       def build_vector_from_document(document_string, document_id)
-        word_list = @parsed_document_cache[document_id] || tokenise_and_filter(document_string)
+        word_list = @parsed_document_cache[document_id] || @parser.tokenise_and_filter(document_string)
         build_vector(word_list)
       end
 
       def build_vector_from_string(word_string)
-        word_list = tokenise_and_filter(word_string)
+        word_list = @parser.tokenise_and_filter(word_string)
         build_vector(word_list)
       end
 
@@ -87,12 +70,6 @@ module Semantic
         vector = Linalg::DMatrix.new(1, @vector_keyword_index.length)
         word_list.each { |word| vector[0, @vector_keyword_index[word]] += 1 if @vector_keyword_index.has_key?(word)  }
         vector
-      end
-
-      def tokenise_and_filter(word_string)
-        word_list = @parser.tokenise(word_string)
-        #Remove common words which have no search value
-        word_list = @parser.remove_stop_words(word_list)
       end
 
       def log(string)

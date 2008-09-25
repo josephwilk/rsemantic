@@ -1,7 +1,6 @@
 require 'stemmer'
 
 module Semantic
-
   class Parser
 
     def initialize
@@ -11,6 +10,11 @@ module Semantic
       File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
         @stopwords = file.read().split()
       end
+    end
+
+    def tokenise_and_filter(string)
+      word_list = tokenise(string)
+      remove_stop_words(word_list)
     end
 
     #remove any nasty grammar tokens from string """
@@ -35,5 +39,4 @@ module Semantic
     end
 
   end
-
 end
