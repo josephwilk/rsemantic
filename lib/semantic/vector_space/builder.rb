@@ -13,14 +13,24 @@ module Semantic
 
       #Create the vector space for the passed document strings
       def build(documents)
-        @vector_keyword_index = get_vector_keyword_index(documents)
-        document_vectors = documents.map {|document| build_vector(document) }
-        document_matrix = Linalg::DMatrix.join_rows(document_vectors)
-	
+        document_matrix = build_document_matrix(documents)
+        	
         log("Initial matrix")  
         log(document_matrix)
         
         transform(document_matrix)
+      end
+
+      #Convert query string into a term vector
+      def build_query_vector(termList)
+        build_vector(termList.join(" "))
+      end
+
+      private
+      def build_document_matrix(documents)
+        @vector_keyword_index = get_vector_keyword_index(documents)
+        document_vectors = documents.map {|document| build_vector(document) }
+        document_matrix = Linalg::DMatrix.join_rows(document_vectors)
       end
 
       def transform(matrix)
@@ -69,12 +79,6 @@ module Semantic
         vector
       end
 
-      #Convert query string into a term vector
-      def build_query_vector(termList)
-        build_vector(termList.join(" "))
-      end
-
-      private
       def log(string)
         puts string if @options[:verbose]
       end
