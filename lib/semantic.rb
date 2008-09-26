@@ -27,5 +27,5 @@ module Semantic
     @logger.level = Logger::INFO
     @logger
   end
-
+  
 end

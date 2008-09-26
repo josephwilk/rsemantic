@@ -2,6 +2,8 @@ module Semantic
   class Search
 
     def initialize(documents, options={})
+      Semantic.logger.level= Logger::ERROR unless options[:verbose]
+      
       @builder = VectorSpace::Builder.new(options)
       @matrix_transformer = MatrixTransformer.new(options)
 
