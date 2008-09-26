@@ -22,7 +22,7 @@ describe Semantic::VectorSpace::Builder do
 
     it "should generate a valid vector" do
       builder = Semantic::VectorSpace::Builder.new
-      builder.build(["query string"])
+      builder.build_document_matrix(["query string"])
       query = builder.build_query_vector(["query","string"])
 
       query.should == Linalg::DMatrix.rows([[1,1]])
@@ -30,7 +30,7 @@ describe Semantic::VectorSpace::Builder do
 
     it "should generate empty vector when terms are not in document matrix" do
       builder = Semantic::VectorSpace::Builder.new
-      builder.build(["string"])
+      builder.build_document_matrix(["string"])
       query = builder.build_query_vector(["not-in-document"])
 
       query.should == Linalg::DMatrix.rows([[0]])

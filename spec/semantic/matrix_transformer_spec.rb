@@ -17,6 +17,14 @@ describe Semantic::MatrixTransformer do
       }.should_not raise_error
     end
 
+    it "should use defaults transforms in none are specified" do
+      matrix_transformer = Semantic::MatrixTransformer.new
+      Semantic::Transform.should_receive(:const_get).with(:LSA).and_return(mock_transform)
+      Semantic::Transform.should_receive(:const_get).with(:TFIDF).and_return(mock_transform)
+
+      matrix_transformer.apply_transforms(matrix)
+    end
+
     it "should send transform message to class to transform matrix" do
       matrix_transformer = Semantic::MatrixTransformer.new(:transforms => [:LSA])
       Semantic::Transform.stub!(:const_get).and_return(mock_transform)
@@ -29,7 +37,6 @@ describe Semantic::MatrixTransformer do
     it "should check that transform class is capable of transforming" do
       matrix_transformer = Semantic::MatrixTransformer.new(:transforms => [:LSA])
       Semantic::Transform.stub!(:const_get).and_return(mock_transform)
-
       mock_transform.should_receive(:respond_to?).with(:transform)
 
       matrix_transformer.apply_transforms(matrix)

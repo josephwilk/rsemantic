@@ -7,19 +7,14 @@ module Semantic
 
       def initialize(options={})
         @parser = Parser.new
-        @matrix_transformer = MatrixTransformer.new(options)
         @options = options
         @parsed_document_cache = []
       end
 
-      #Create the vector space for the passed document strings
-      def build(documents)
-        document_matrix = build_document_matrix(documents)
-        	
-        log("Initial matrix")  
-        log(document_matrix)
-        
-        @matrix_transformer.apply_transforms(document_matrix)
+      def build_document_matrix(documents)
+        @vector_keyword_index = build_vector_keyword_index(documents)
+        document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector_from_document(document, document_id)}
+        document_matrix = Linalg::DMatrix.join_rows(document_vectors)
       end
 
       #Convert query string into a term vector
@@ -28,12 +23,6 @@ module Semantic
       end
 
       private
-      def build_document_matrix(documents)
-        @vector_keyword_index = build_vector_keyword_index(documents)
-        document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector_from_document(document, document_id)}
-        document_matrix = Linalg::DMatrix.join_rows(document_vectors)
-      end
-
       #Create the keyword associated to the position of the elements within the document vectors
       def build_vector_keyword_index(document_list)
         document_list.each_with_index do |document, index|
@@ -70,10 +59,6 @@ module Semantic
         vector = Linalg::DMatrix.new(1, @vector_keyword_index.length)
         word_list.each { |word| vector[0, @vector_keyword_index[word]] += 1 if @vector_keyword_index.has_key?(word)  }
         vector
-      end
-
-      def log(string)
-        puts string if @options[:verbose]
       end
 
     end

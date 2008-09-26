@@ -17,3 +17,10 @@ require 'linalg'
 #A processor for removing the commoner morphological and inflexional endings from words in English
 require 'stemmer'
 
+module Semantic
+
+  def self.logger
+    Logger.new
+  end
+
+end
