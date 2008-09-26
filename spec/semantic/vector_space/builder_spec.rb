@@ -15,7 +15,7 @@ describe Semantic::VectorSpace::Builder do
 
     it "should build vector from string" do
       builder = Semantic::VectorSpace::Builder.new
-      builder.should_receive(:build_vector_from_string).with("query string")
+      builder.should_receive(:build_vector).with("query string")
     
       builder.build_query_vector(["query","string"])
     end
