@@ -10,20 +10,15 @@ module Semantic
       @transforms.each do |transform|
         begin
           transform_class = Semantic::Transform.const_get(transform)
-          log("Applying #{transform} transform")
+          Semantic.logger.info("Applying #{transform} transform")
           matrix = transform_class.send(:transform, matrix) if transform_class.respond_to?(:transform)
-          log(matrix)
+          Semantic.logger.info(matrix)
         rescue Exception => e
-          puts("Error: Cannot perform transform: #{transform}")
-          puts(e)
+          Semantic.logger.error("Error: Cannot perform transform: #{transform}")
+          Semantic.logger.error(e)
         end
       end
       matrix
-    end
-
-    #TODO: refactor out this duplication. Pass logger object into constructor?
-    def log(string)
-      puts string if @options[:verbose]
     end
 
   end

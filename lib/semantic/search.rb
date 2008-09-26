@@ -7,6 +7,9 @@ module Semantic
 
       #Map documents to vector space
       @document_matrix = @builder.build_document_matrix(documents)
+      
+      Semantic.logger.info(@document_matrix)
+      
       @document_matrix = @matrix_transformer.apply_transforms(@document_matrix)
     end
   
