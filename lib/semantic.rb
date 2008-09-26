@@ -24,7 +24,7 @@ module Semantic
     return @logger if @logger
     @logger = Logger.new(STDOUT)
     @logger.formatter = proc { |severity, time, progname, msg| "#{msg}\n" }
-    @logger.level = Logger::INFO
+    @logger.level = Logger::ERROR
     @logger
   end
   
