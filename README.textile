@@ -1,6 +1,6 @@
 h1. Rsemantic
 
-A document vector search with flexible matrix transforms. Currently supports: 
+A document vector search with flexible matrix transforms for Ruby. Currently supports: 
 
 * Latent semantic analysis
 * Term frequency - inverse document frequency
@@ -39,6 +39,38 @@ There are some pre-built examples that can be run through rake. They all operate
 rake example:lsa
 
 rake example:vector_space
+</code></pre>
+
+h2. Adding Transforms
+
+I'm still working on making it easier to add matrix transforms. At the momment they are too embedded in the code. Until then if your are keen to add new transforms you can do the following:
+
+All matrix transforms live in:
+
+rsemantic/lib/semantic/transform/*
+
+Add a new class for your transform here. It requires a single class method which is passed a matrix and it should return a matrix.  
+
+For example adding a PLSA transform our class would look like this:
+
+<pre><code>
+module Semantic
+  module Transform
+    class PLSA
+
+      self.transform(matrix)
+        matrix
+      end      
+
+    end
+  end
+end
+</code></pre>
+
+And then to use the transform we pass the class name in as a symbol when creating the search object.
+
+<pre><code>
+search = Semantic::Search.new(documents, :transforms => [:PLSA])
 </code></pre>
 
 h2. Dependencies
