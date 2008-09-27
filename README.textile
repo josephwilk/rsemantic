@@ -21,7 +21,7 @@ search = Semantic::Search.new(documents, :verbose => true)
 #The order of transforms reflects the order they will be performed on the matrix
 search = Semantic::Search.new(documents, :transforms => [:LSA])
 
-#Defaults to performing :TFIDF and the :LSA
+#Defaults to performing :TFIDF and then :LSA
 search = Semantic::Search.new(documents)
 
 #Find documents that are related to documents[0] with a ranking for how related they are.
