@@ -13,22 +13,27 @@ documents = ["The cat in the hat disabled",
              "Do and cats make good pets.",
              "I haven't got a hat."]
 
-#Output how the matrix gets built and transformed
+#Log to stdout how the matrix gets built and transformed
 search = Semantic::Search.new(documents, :verbose => true)
 
-#We can pass different transforms to be performed. Currently only :LSA and :TFIDF. Order of transforms reflects the order they will be performed on the matrix
+#We can pass different transforms to be performed. 
+#Currently only :LSA and :TFIDF. 
+#The order of transforms reflects the order they will be performed on the matrix
 search = Semantic::Search.new(documents, :transforms => [:LSA])
 
+#Defaults to performing :TFIDF and the :LSA
 search = Semantic::Search.new(documents)
 
-#Find documents related to documents[0]
+#Find documents that are related to documents[0] with a ranking for how related they are.
 puts search.related(0)
 
-#Search documents for the word cat.
+#Search documents for the word cat. Returns a ranking for how relevant the matches where for each document.
 puts search.search(["cat"])
 </code></pre>
 
 h2. Rake Examples
+
+There are some pre-built examples that can be run through rake. They all operate in verbose mode so you can see whats going on.
 
 <pre><code>
 rake example:lsa
