@@ -43,7 +43,7 @@ rake example:vector_space
 
 h2. Adding Transforms
 
-I'm still working on making it easier to add matrix transforms. At the momment they are too embedded in the code. Until then if your are keen to add new transforms you can do the following:
+I'm still working on making it easier to add matrix transforms. At the moment they are too embedded in the code. Until then if your are keen to add new transforms you can do the following:
 
 All matrix transforms live in:
 
@@ -51,7 +51,11 @@ rsemantic/lib/semantic/transform/*
 
 Add a new class for your transform here. It requires a single class method which is passed a matrix and it should return a matrix.  
 
-For example adding a PLSA transform our class would look like this:
+The matrix is a "Linalg::DMatrix":http://linalg.rubyforge.org/classes/Linalg/DMatrix.html object.
+
+It offers some nice builtin matrix transforms.
+
+So as an example adding a PLSA transform our class would look like this:
 
 <pre><code>
 module Semantic
