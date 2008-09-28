@@ -1,0 +1,5 @@
+== FEATURES/PROBLEMS:
+
+* Applying transforms to query vectors
+* Detect the optimal dimension reduction in LSA.
+* Allow objects to be passed in as transforms.
