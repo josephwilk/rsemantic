@@ -25,17 +25,8 @@ module Semantic
       private
       #Create the keyword associated to the position of the elements within the document vectors
       def build_vector_keyword_index(documents)
-        vector_index={}
-
         vocabulary_list = find_unique_vocabulary(documents)
-
-        #Associate a position with the keywords which maps to the dimension on the vector used to represent this word
-        column=0
-	vocabulary_list.each |word|
-          vector_index[word]=column
-          column+=1
-        end
-        vector_index  #(keyword:position)
+	map_vocabulary_to_vector_positions(vocabulary_list)
       end
 
       def find_unique_vocabulary(documents)
@@ -46,9 +37,17 @@ module Semantic
         vocabulary_list = @parsed_document_cache.inject([]) { |parsed_document, vocabulary_list| vocabulary_list + parsed_document  }
         vocabulary_list.uniq
       end
-
-      #Create the keyword associated to the position of the elements within the document vectors
-      #@pre: unique(@vector_keyword_index)
+      
+      def map_vocabulary_to_vector_positions(vocabulary_list)
+        vector_index={}
+        column=0
+	vocabulary_list.each |word|
+          vector_index[word]=column
+          column+=1
+        end
+        vector_index
+      end 
+    
       def build_vector(word_string, document_id=nil)
         if document_id.nil?
           word_list = @parser.tokenise_and_filter(word_string)
