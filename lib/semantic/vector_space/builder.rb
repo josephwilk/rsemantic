@@ -54,7 +54,7 @@ module Semantic
         if document_id.nil?
           word_list = @parser.tokenise_and_filter(word_string)
         else
-          word_list = @parsed_document_cache[document_id] || @parser.tokenise_and_filter(document_string)
+          word_list = @parsed_document_cache[document_id]
         end
         
         vector = Linalg::DMatrix.new(1, @vector_keyword_index.length)
