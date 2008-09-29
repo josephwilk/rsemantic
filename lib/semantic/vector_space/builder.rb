@@ -41,7 +41,7 @@ module Semantic
       def map_vocabulary_to_vector_positions(vocabulary_list)
         vector_index={}
         column=0
-	vocabulary_list.each |word|
+	      vocabulary_list.each do |word|
           vector_index[word]=column
           column+=1
         end
