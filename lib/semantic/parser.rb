@@ -17,7 +17,7 @@ module Semantic
       remove_stop_words(word_list)
     end
 
-    #remove any nasty grammar tokens from string """
+    #remove any nasty grammar tokens from string
     def clean(string)
       string = string.gsub(".","")
       string = string.gsub(/\s+/," ")
@@ -30,7 +30,7 @@ module Semantic
       list.select {|word| word unless @stopwords.include? word }
     end
 
-    #break string up into tokens and stem words """
+    #break string up into tokens and stem words
     def tokenise(string)
       string = clean(string)
       words = string.split(" ")
