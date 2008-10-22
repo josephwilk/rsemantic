@@ -1,63 +1,65 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe Semantic::Transform::LSA do
+module Semantic
+  describe Transform::LSA do
 
-  large_matrix = Linalg::DMatrix.rows([[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
-                                       [0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0],
-                                       [1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0],
-                                       [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+    large_matrix = Linalg::DMatrix.rows([[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
+    [0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0],
+    [1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
 
-  tiny_matrix = Linalg::DMatrix.rows([[0.0, 1.0, 0.0], 
-                                      [1.0, 0.0, 1.0]])
+    tiny_matrix = Linalg::DMatrix.rows([[0.0, 1.0, 0.0],
+    [1.0, 0.0, 1.0]])
 
-  u = Linalg::DMatrix.rows([[1,0],
-                            [0,1]])
+    u = Linalg::DMatrix.rows([[1,0],
+    [0,1]])
 
-  vt = Linalg::DMatrix.rows([[1,0,0],
-                             [1,0,0],
-                             [1,0,0]])
-                             
-  sigma = Linalg::DMatrix.rows([[1,0,0],
-                                [0,1,0]])
+    vt = Linalg::DMatrix.rows([[1,0,0],
+    [1,0,0],
+    [1,0,0]])
 
-  
-  describe "latent semantic analysis transform" do
+    sigma = Linalg::DMatrix.rows([[1,0,0],
+    [0,1,0]])
 
-    it "should use svd on matrix" do
-      matrix = Linalg::DMatrix.rows([[0.0, 1.0, 0.0], 
-                                     [1.0, 0.0, 1.0]])
 
-      matrix.should_receive(:singular_value_decomposition).and_return([u, sigma, vt])
+    describe "latent semantic analysis transform" do
 
-      Linalg::DMatrix.stub!(:rows).and_return(matrix)
+      it "should use svd on matrix" do
+        matrix = Linalg::DMatrix.rows([[0.0, 1.0, 0.0],
+        [1.0, 0.0, 1.0]])
 
-      Semantic::Transform::LSA.transform(matrix)
-    end
+        matrix.should_receive(:singular_value_decomposition).and_return([u, sigma, vt])
 
-    it "should reduce the noise in the sigma matrix" do
-      matrix = Linalg::DMatrix.rows([[0.0, 1.0, 0.0], 
-                                     [1.0, 0.0, 1.0]])
+        Linalg::DMatrix.stub!(:rows).and_return(matrix)
 
-      matrix.stub!(:singular_value_decomposition).and_return([u, sigma, vt])
-      Linalg::DMatrix.stub!(:rows).and_return(matrix)
+        Transform::LSA.transform(matrix)
+      end
 
-      sigma.should_receive(:[]=).with(0,0,0)
-      sigma.should_receive(:[]=).with(1,1,0)
-      
-      Semantic::Transform::LSA.transform(matrix, 2)
-    end
+      it "should reduce the noise in the sigma matrix" do
+        matrix = Linalg::DMatrix.rows([[0.0, 1.0, 0.0],
+        [1.0, 0.0, 1.0]])
 
-    it "should prevent reducing dimensions greater than the matrixes own dimensions" do
-      lambda { Semantic::Transform::LSA.transform tiny_matrix, 100 }.should raise_error(Exception)
-    end
-    
-    it "should transform LSA matrix" do
-      transformed_matrix = Semantic::Transform::LSA.transform tiny_matrix
+        matrix.stub!(:singular_value_decomposition).and_return([u, sigma, vt])
+        Linalg::DMatrix.stub!(:rows).and_return(matrix)
 
-      #TODO: better way to compare result matrix
-      transformed_matrix.to_s.should == Linalg::DMatrix.rows([[0,0,0],[1,0,1]]).to_s
+        sigma.should_receive(:[]=).with(0,0,0)
+        sigma.should_receive(:[]=).with(1,1,0)
+
+        Transform::LSA.transform(matrix, 2)
+      end
+
+      it "should prevent reducing dimensions greater than the matrixes own dimensions" do
+        lambda { Transform::LSA.transform tiny_matrix, 100 }.should raise_error(Exception)
+      end
+
+      it "should transform LSA matrix" do
+        transformed_matrix = Transform::LSA.transform tiny_matrix
+
+        #TODO: better way to compare result matrix
+        transformed_matrix.to_s.should == Linalg::DMatrix.rows([[0,0,0],[1,0,1]]).to_s
+      end
+
     end
 
   end
-
 end
