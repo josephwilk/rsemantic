@@ -1,0 +1,3 @@
+== 0.0.1 
+
+* Changed internal representation of vector space. Using columns as documents and rows as terms. This is more consistent which LSA research papers.

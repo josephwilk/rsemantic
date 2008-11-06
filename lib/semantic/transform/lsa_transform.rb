@@ -8,14 +8,14 @@ module Semantic
         # Reduce the dimension of sigma by specified factor producing sigma'.
         # Then dot product the matrices:  U . SIGMA' . VT = MATRIX'
         def transform(matrix, dimensions=1)
-          rows = matrix.num_rows
+          columns = matrix.num_columns
 
-          if dimensions <= rows: #Its a valid reduction
+          if dimensions <= columns: #Its a valid reduction
 
             u, sigma, vt = matrix.singular_value_decomposition
 
             #Dimension reduction, build SIGMA'
-            for index in ((rows-dimensions)...rows)
+            for index in ((columns-dimensions)...columns)
               sigma[index,index]=0
             end
 

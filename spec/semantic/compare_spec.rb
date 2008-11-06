@@ -4,7 +4,7 @@ module Semantic
   describe Compare do
 
     def vector(values)
-      Linalg::DMatrix.rows([values])
+      Linalg::DMatrix.columns([values])
     end
 
     it "should calculate cosine" do

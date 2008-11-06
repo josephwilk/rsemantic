@@ -27,7 +27,7 @@ module Semantic
           builder.build_document_matrix(["query string"])
           query = builder.build_query_vector(["query","string"])
 
-          query.should == Linalg::DMatrix.rows([[1,1]])
+          query.should == Linalg::DMatrix.columns([[1,1]])
         end
 
         it "should generate empty vector when terms are not in document matrix" do
@@ -35,7 +35,7 @@ module Semantic
           builder.build_document_matrix(["string"])
           query = builder.build_query_vector(["not-in-document"])
 
-          query.should == Linalg::DMatrix.rows([[0]])
+          query.should == Linalg::DMatrix.columns([[0]])
         end
 
       end

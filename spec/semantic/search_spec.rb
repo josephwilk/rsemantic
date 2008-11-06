@@ -14,11 +14,11 @@ module Semantic
     end
 
     def vector_space
-      @vector_space ||= Linalg::DMatrix.rows([[0,1],[1,0]])
+      @vector_space ||= Linalg::DMatrix.columns([[0,1],[1,0]])
     end
 
     def query_vector
-      @query_vector ||= Linalg::DMatrix.rows([[1,0]])
+      @query_vector ||= Linalg::DMatrix.columns([[1,0]])
     end
 
     def matrix(array)
@@ -36,6 +36,7 @@ module Semantic
 
       it "should transform matrices" do
         MatrixTransformer.stub!(:new).and_return(mock_matrix_transformer)
+
         mock_matrix_transformer.should_receive(:apply_transforms).with(matrix([[1]])).and_return(matrix([[1]]))
 
         Search.new(['test'])
@@ -48,6 +49,7 @@ module Semantic
       it "should map search term to vector space" do
         VectorSpace::Builder.stub!(:new).and_return(mock_builder)
         mock_builder.stub!(:build_document_matrix).and_return(vector_space)
+
         mock_builder.should_receive(:build_query_vector).with("cat").and_return(query_vector)
 
         vector_search = Search.new(documents)
@@ -69,8 +71,8 @@ module Semantic
         MatrixTransformer.stub!(:new).and_return(mock_matrix_transformer)
         mock_matrix_transformer.stub!(:apply_transforms).and_return(vector_space)
 
-        Compare.should_receive(:cosine).with(vector_space.row(0), vector_space.row(0))
-        Compare.should_receive(:cosine).with(vector_space.row(0), vector_space.row(1))
+        Compare.should_receive(:cosine).with(vector_space.column(0), vector_space.column(0))
+        Compare.should_receive(:cosine).with(vector_space.column(0), vector_space.column(1))
 
         vector_search = Search.new(documents)
         vector_search.related(0)

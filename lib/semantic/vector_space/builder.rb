@@ -14,7 +14,7 @@ module Semantic
       def build_document_matrix(documents)
         @vector_keyword_index = build_vector_keyword_index(documents)
         document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector(document, document_id)}
-        document_matrix = Linalg::DMatrix.join_rows(document_vectors)
+        document_matrix = Linalg::DMatrix.join_columns(document_vectors)
       end
 
       #Convert query string into a term vector
@@ -42,10 +42,10 @@ module Semantic
       
       def map_vocabulary_to_vector_positions(vocabulary_list)
         vector_index={}
-        column=0
+        column = 0
 	      vocabulary_list.each do |word|
-          vector_index[word]=column
-          column+=1
+          vector_index[word] = column
+          column += 1
         end
         vector_index
       end 
@@ -57,8 +57,8 @@ module Semantic
           word_list = @parsed_document_cache[document_id]
         end
         
-        vector = Linalg::DMatrix.new(1, @vector_keyword_index.length)
-        word_list.each { |word| vector[0, @vector_keyword_index[word]] += 1 if @vector_keyword_index.has_key?(word)  }
+        vector = Linalg::DMatrix.new(@vector_keyword_index.length, 1)
+        word_list.each { |word| vector[@vector_keyword_index[word] , 0] += 1 if @vector_keyword_index.has_key?(word)  }
         vector
       end
 

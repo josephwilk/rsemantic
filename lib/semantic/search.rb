@@ -17,8 +17,8 @@ module Semantic
   
     def related(documentId)
       ratings = []
-      for index in (0...@document_matrix.nrow)
-        ratings << Compare.similarity(@document_matrix.row(documentId), @document_matrix.row(index))
+      for index in (0...@document_matrix.ncol)
+        ratings << Compare.similarity(@document_matrix.column(documentId), @document_matrix.column(index))
       end
       ratings
     end
@@ -27,8 +27,8 @@ module Semantic
       ratings = []
       query_vector = @builder.build_query_vector(searchList)
       
-      for index in (0...@document_matrix.nrow)
-        ratings << Compare.similarity(query_vector, @document_matrix.row(index))
+      for index in (0...@document_matrix.ncol)
+        ratings << Compare.similarity(query_vector, @document_matrix.column(index))
       end
       ratings
     end

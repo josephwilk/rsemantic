@@ -28,7 +28,7 @@ module Semantic
         Frequency.should_receive(:term_frequency).with(1.0, 3.0).and_return(1.0)
         Frequency.should_receive(:term_frequency).with(2.0, 3.0).and_return(1.0)
 
-        Transform::TFIDF.transform matrix([[1,2]])
+        Transform::TFIDF.transform matrix([[1],[2]])
       end
 
       it "should calculate inverse document frequency" do
@@ -39,9 +39,9 @@ module Semantic
       end
 
       it "should calculate term frequency * inverse document freuency" do
-        transformed_matrix = Transform::TFIDF.transform matrix([[1,0],[1,1]])
+        transformed_matrix = Transform::TFIDF.transform matrix([[1,1],[0,1]])
 
-        transformed_matrix.to_s.should == Linalg::DMatrix.rows([[0, 0],[0, 0.346574]]).to_s
+        transformed_matrix.to_s.should == Linalg::DMatrix.columns([[0, 0],[0, 0.346574]]).to_s
       end
 
     end
