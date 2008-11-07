@@ -7,18 +7,17 @@ module Semantic
       @builder = VectorSpace::Builder.new(options)
       @matrix_transformer = MatrixTransformer.new(options)
 
-      #Map documents to vector space
-      @document_matrix = @builder.build_document_matrix(documents)
+      @vector_space_model = @builder.build_document_matrix(documents)
       
-      Semantic.logger.info(@document_matrix)
+      Semantic.logger.info(@vector_space_model)
       
-      @document_matrix = @matrix_transformer.apply_transforms(@document_matrix)
+      @vector_space_model = @matrix_transformer.apply_transforms(@vector_space_model)
     end
   
     def related(documentId)
       ratings = []
-      for index in (0...@document_matrix.ncol)
-        ratings << Compare.similarity(@document_matrix.column(documentId), @document_matrix.column(index))
+      for index in (0...@vector_space_model.ncol)
+        ratings << Compare.similarity(@vector_space_model.column(documentId), @vector_space_model.column(index))
       end
       ratings
     end
@@ -26,9 +25,8 @@ module Semantic
     def search(searchList)
       ratings = []
       query_vector = @builder.build_query_vector(searchList)
-      
-      for index in (0...@document_matrix.ncol)
-        ratings << Compare.similarity(query_vector, @document_matrix.column(index))
+      for index in (0...@vector_space_model.ncol)
+        ratings << Compare.similarity(query_vector, @vector_space_model.column(index))
       end
       ratings
     end

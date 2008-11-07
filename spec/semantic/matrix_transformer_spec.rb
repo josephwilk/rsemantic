@@ -7,14 +7,17 @@ module Semantic
       @transform ||= mock(Transform)
     end
 
-    matrix = Linalg::DMatrix.rows([[1,0],[0,1]])
+    def mock_vector_space
+      mock("vector space", :matrix => Linalg::DMatrix.rows([[1,0],[0,1]]), :matrix= => nil )
+    end
+
 
     describe "transforming matrix" do
 
       it "should ignore invalid transform class" do
         matrix_transformer = MatrixTransformer.new(:transforms => [:FAKE])
         lambda {
-          matrix_transformer.apply_transforms(matrix)
+          matrix_transformer.apply_transforms(mock_vector_space)
         }.should_not raise_error
       end
 
@@ -23,7 +26,7 @@ module Semantic
         Transform.should_receive(:const_get).with(:LSA).and_return(mock_transform)
         Transform.should_receive(:const_get).with(:TFIDF).and_return(mock_transform)
 
-        matrix_transformer.apply_transforms(matrix)
+        matrix_transformer.apply_transforms(mock_vector_space)
       end
 
       it "should send transform message to class to transform matrix" do
@@ -32,7 +35,7 @@ module Semantic
 
         mock_transform.should_receive(:transform)
 
-        matrix_transformer.apply_transforms(matrix)
+        matrix_transformer.apply_transforms(mock_vector_space)
       end
 
       it "should check that transform class is capable of transforming" do
@@ -40,7 +43,7 @@ module Semantic
         Transform.stub!(:const_get).and_return(mock_transform)
         mock_transform.should_receive(:respond_to?).with(:transform)
 
-        matrix_transformer.apply_transforms(matrix)
+        matrix_transformer.apply_transforms(mock_vector_space)
       end
 
     end

@@ -1,1 +1,1 @@
-%w{builder}.each{|f| require "semantic/vector_space/#{f}"}
+%w{model builder}.each{|f| require "semantic/vector_space/#{f}"}

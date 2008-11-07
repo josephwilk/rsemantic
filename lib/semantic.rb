@@ -9,7 +9,6 @@ require "semantic/parser"
 require "semantic/matrix_transformer"
 require "semantic/search"
 require "semantic/transform"
-require "semantic/format"
 
 require 'rubygems'
 require 'linalg'

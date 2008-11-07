@@ -18,14 +18,14 @@ module Semantic
       File.stub!(:open).and_yield(file)
 
       parser = Parser.new
-      parser.tokenise("dragon.").should == ["dragon"]
+      parser.tokenise_and_stem("dragon.").should == ["dragon"]
     end
 
     it "should tokenise the string" do
       parser = Parser.new
 
       parser.stub!(:remove_stop_words).and_return(['mouse','trap'])
-      parser.should_receive(:tokenise).and_return(['mouse','trap'])
+      parser.should_receive(:tokenise_and_stem).and_return(['mouse','trap'])
 
       parser.tokenise_and_filter(['the mouse trap'])
     end

@@ -13,11 +13,13 @@ module Semantic
 
       def build_document_matrix(documents)
         @vector_keyword_index = build_vector_keyword_index(documents)
+       
         document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector(document, document_id)}
         document_matrix = Linalg::DMatrix.join_columns(document_vectors)
+        
+        Model.new(document_matrix, @vector_keyword_index)
       end
 
-      #Convert query string into a term vector
       def build_query_vector(term_list)
         build_vector(term_list.join(" "))
       end

@@ -1,3 +1,4 @@
 == 0.0.1 
 
 * Changed internal representation of vector space. Using columns as documents and rows as terms. This is more consistent which LSA research papers.
+* Wrap DMatrix in VectorSpace::Model, allowing us to store keywords with the matrix and get pretty output

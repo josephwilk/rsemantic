@@ -5,3 +5,5 @@
 * Allow objects to be passed in as transforms.
 * Implement Probabilistic latent semantic analysis
 * Implement Latent Dirichlet Allocation
+
+* Matrix transformer has to popout the matrix of VectorSpace::Model and reassign it, get rid of this.

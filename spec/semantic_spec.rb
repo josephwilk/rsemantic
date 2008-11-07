@@ -1,7 +1,11 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Semantic do
-  it "should be prodded at" do
-    
+module Semantic
+  module VectorSpace
+    describe Model do
+      it "should be prodded at" do
+
+      end
+    end
   end
 end

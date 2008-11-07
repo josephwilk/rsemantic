@@ -5,7 +5,6 @@ module Semantic
 
     def initialize
       #English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
-
       #TODO: nicer way to reference stop file location?
       File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
         @stopwords = file.read().split()
@@ -13,7 +12,7 @@ module Semantic
     end
 
     def tokenise_and_filter(string)
-      word_list = tokenise(string)
+      word_list = tokenise_and_stem(string)
       remove_stop_words(word_list)
     end
 
@@ -25,13 +24,12 @@ module Semantic
       return string
     end
 
-    #Remove common words which have no search value
+    #stop words are common words which have no search value
     def remove_stop_words(list)
       list.select {|word| word unless @stopwords.include? word }
     end
 
-    #break string up into tokens and stem words
-    def tokenise(string)
+    def tokenise_and_stem(string)
       string = clean(string)
       words = string.split(" ")
 
