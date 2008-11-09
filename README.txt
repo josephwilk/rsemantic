@@ -14,6 +14,7 @@ Documentation: http://github.com/JoeSniff/rsemantic/wikis/home
 == REQUIREMENTS:
 
 * Linalg - http://rubyforge.org/projects/linalg/
+* stemmer - http://rubyforge.org/projects/stemmer/
 
 == INSTALL:
 
