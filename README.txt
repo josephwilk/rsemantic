@@ -9,7 +9,7 @@ A Ruby document vector search with flexible matrix transforms. Current supported
 * Latent semantic analysis
 * Term frequency - inverse document frequency
 
-Documentation: http://github.com/JoeSniff/rsemantic/wikis/home
+Documentation: http://github.com/josephwilk/rsemantic/wikis/home
 
 == REQUIREMENTS:
 
@@ -18,7 +18,7 @@ Documentation: http://github.com/JoeSniff/rsemantic/wikis/home
 
 == INSTALL:
 
-* git clone git://github.com/JoeSniff/rsemantic.git
+* git clone git://github.com/josephwilk/rsemantic.git
 
 == LICENSE
 
