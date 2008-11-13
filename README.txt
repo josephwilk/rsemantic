@@ -1,6 +1,6 @@
 = Rsemantic
 
-* http://github.com/JoeSniff/rsemantic
+* http://github.com/josephwilk/rsemantic
 
 == DESCRIPTION:
 
