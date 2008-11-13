@@ -3,7 +3,7 @@ require 'semantic/version'
 AUTHOR = 'Joseph Wilk'  # can also be an array of Authors
 EMAIL = "josephwilk@joesniff.co.uk"
 DESCRIPTION = "A document vector search with flexible matrix transforms. Currently supports Latent semantic analysis and Term frequency - inverse document frequency"
-GEM_NAME = 'semantic' # what ppl will type to install your gem
+GEM_NAME = 'rsemantic' # what ppl will type to install your gem
 HOMEPATH = "http://github.com/josephwilk/rsemantic"
 RUBYFORGE_PROJECT = 'rsemantic'
 
