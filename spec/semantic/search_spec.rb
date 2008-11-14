@@ -18,7 +18,7 @@ module Semantic
     end
 
     def vector_space_model(stubs = {})
-      @vector_space_model ||= VectorSpace::Model.new(Linalg::DMatrix.rows([[0,1],[1,0]]), [])
+      @vector_space_model ||= VectorSpace::Model.new(Linalg::DMatrix.rows([[0,1],[1,0]]), {})
     end
 
     def matrix(array)
@@ -85,6 +85,42 @@ module Semantic
         vector_search = Search.new(documents)
 
         vector_search.related(0)
+      end
+
+    end
+
+    describe "logging" do
+
+      before(:each) do
+        @out = StringIO.new
+        Semantic.logger = Logger.new(@out)
+      end
+
+      it "should set info level if in verbose mode" do
+        VectorSpace::Builder.stub!(:new).and_return(mock_builder)
+        mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
+
+        Search.new(['test'], :verbose => true)
+        
+        Semantic.logger.level.should == Logger::INFO
+      end
+      
+      it "should set error level if not in verbose mode" do
+        VectorSpace::Builder.stub!(:new).and_return(mock_builder)
+        mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
+
+        Search.new(['test'], :verbose => false)
+        
+        Semantic.logger.level.should == Logger::ERROR
+      end
+
+      it "should default to error level if verbose is not specified" do
+        VectorSpace::Builder.stub!(:new).and_return(mock_builder)
+        mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
+
+        Search.new(['test'])
+        
+        Semantic.logger.level.should == Logger::ERROR
       end
 
     end

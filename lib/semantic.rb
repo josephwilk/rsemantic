@@ -18,6 +18,10 @@ require 'logger'
 
 module Semantic
 
+  class << self
+    attr_writer :logger
+  end
+  
   def self.logger
     return @logger if @logger
     @logger = Logger.new(STDOUT)
