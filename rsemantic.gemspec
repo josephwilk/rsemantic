@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{rsemantic}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joseph Wilk"]
-  s.date = %q{2008-11-13}
+  s.date = %q{2008-11-14}
   s.description = %q{A document vector search with flexible matrix transforms. Currently supports Latent semantic analysis and Term frequency - inverse document frequency}
   s.email = ["josephwilk@joesniff.co.uk"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt", "TODO.txt"]
