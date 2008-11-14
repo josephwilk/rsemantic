@@ -8,16 +8,13 @@ module Semantic
           columns = matrix.num_columns
 
           if dimensions <= columns: #Its a valid reduction
-
             u, sigma, vt = matrix.singular_value_decomposition
 
             sigma_prime = reduce_dimensions(number_of_dimensions_to_reduce, sigma)
 
-            #Reconstruct MATRIX' and Save transform
             matrix_prime = u * sigma_prime * vt
-
           else
-            raise Exception, "dimension reduction cannot be greater than %s" % rows
+            raise Exception, "dimension reduction cannot be greater than %s" % columns
           end
           
           matrix_prime
