@@ -1,3 +1,8 @@
+== 0.1.2
+
+= Bugs
+* Fixed problem where LSA was raising errors when trying to reduce dimensions of non-square matrixes. (Joseph Wilk)
+
 == 0.1.1 
 
 = Bugs
