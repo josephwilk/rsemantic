@@ -7,7 +7,7 @@ module Semantic
         def transform(matrix, number_of_dimensions_to_reduce = 1)
           columns = matrix.num_columns
 
-          if number_of_dimensions_to_reduce <= columns: #Its a valid reduction
+          if number_of_dimensions_to_reduce <= columns #Its a valid reduction
             u, sigma, vt = matrix.singular_value_decomposition
 
             sigma_prime = reduce_dimensions(number_of_dimensions_to_reduce, sigma)

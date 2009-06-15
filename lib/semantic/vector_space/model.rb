@@ -1,5 +1,6 @@
 require 'linalg'
 require 'delegate'
+require 'stringio'
 
 module Semantic
   module VectorSpace
@@ -8,6 +9,7 @@ module Semantic
 
       def initialize(matrix, keywords)
         @keywords = keywords || {}
+        @_dc_obj = matrix
         super(matrix)
       end
       
@@ -22,14 +24,14 @@ module Semantic
       def to_s
         out = StringIO.new
         out.print " " * 9
-
+        
         matrix.ncol.times do |id|
           out.print "  D#{id+1}  " 
         end
         out.puts
 
         matrix.rows.each_with_index do |terms, index|
-          out.print "#{@keywords.index(index).ljust(6)}" if @keywords.has_value?(index)
+          out.print "#{@keywords.key(index).ljust(6)}" if @keywords.has_value?(index)
           out.print "[ "
           terms.columns.each do |document|
             out.print "%+0.2f " % document
