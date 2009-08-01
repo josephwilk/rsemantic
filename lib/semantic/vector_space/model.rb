@@ -31,7 +31,7 @@ module Semantic
         out.puts
 
         matrix.rows.each_with_index do |terms, index|
-          out.print "#{@keywords.key(index).ljust(6)}" if @keywords.has_value?(index)
+          out.print "#{@keywords.index(index).ljust(6)}" if @keywords.has_value?(index)
           out.print "[ "
           terms.columns.each do |document|
             out.print "%+0.2f " % document
