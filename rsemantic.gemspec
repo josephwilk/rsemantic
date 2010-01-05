@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 Gem::Specification.new do |s|
   s.name = %q{rsemantic}
   s.version = "0.1.3"
@@ -8,7 +6,7 @@ Gem::Specification.new do |s|
   s.authors = ["Joseph Wilk"]
   s.date = %q{2009-08-01}
   s.description = %q{A document vector search with flexible matrix transforms. Currently supports Latent semantic analysis and Term frequency - inverse document frequency}
-  s.email = ["josephwilk@joesniff.co.uk"]
+  s.email = ["joe@josephwilk.net"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt", "TODO.txt"]
   s.files = ["History.txt", "Manifest.txt", "README.txt", "Rakefile", "TODO.txt", "config/hoe.rb", "config/requirements.rb", "gem_tasks/deployment.rake", "gem_tasks/environment.rake", "gem_tasks/examples.rake", "gem_tasks/fix_cr_lf.rake", "gem_tasks/gemspec.rake", "gem_tasks/rspec.rake", "gem_tasks/website.rake", "lib/semantic.rb", "lib/semantic/compare.rb", "lib/semantic/matrix_transformer.rb", "lib/semantic/parser.rb", "lib/semantic/search.rb", "lib/semantic/transform.rb", "lib/semantic/transform/lsa_transform.rb", "lib/semantic/transform/tf_idf_transform.rb", "lib/semantic/vector_space.rb", "lib/semantic/vector_space/builder.rb", "lib/semantic/vector_space/model.rb", "lib/semantic/version.rb", "resources/english.stop", "rsemantic.gemspec", "spec/semantic/compare_spec.rb", "spec/semantic/matrix_transformer_spec.rb", "spec/semantic/parser_spec.rb", "spec/semantic/search_spec.rb", "spec/semantic/transform/lsa_transform_spec.rb", "spec/semantic/transform/tf_idf_transform_spec.rb", "spec/semantic/vector_space/builder_spec.rb", "spec/semantic/vector_space/model_spec.rb", "spec/spec.opts", "spec/spec_helper.rb"]
   s.has_rdoc = true
