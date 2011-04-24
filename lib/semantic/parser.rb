@@ -3,10 +3,9 @@ require 'stemmer'
 module Semantic
   class Parser
 
-    def initialize
-      #English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
-      #TODO: nicer way to reference stop file location?
-      File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
+    def initialize(locale='en')
+      # Based on locale codes
+      File.open(File.dirname(__FILE__)+'/../../resources/'+locale+'.stop', 'r') do |file|
         @stopwords = file.read().split()
       end
     end

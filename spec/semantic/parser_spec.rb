@@ -2,9 +2,17 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 module Semantic
   describe Parser do
+    it "should remove stop words based on locale" do
+      file = mock "file"
+      file.stub!(:read).and_return("un una todo")
+      File.stub!(:open).and_yield(file)
+      parser = Parser.new 'es'
 
-    it "should remove stop words" do
-      file = mock("file")
+      parser.remove_stop_words(['hola','una']).should == ['hola']
+    end
+
+    it "should remove English stop words by default" do
+      file = mock "file"
       file.stub!(:read).and_return("a to be")
       File.stub!(:open).and_yield(file)
       parser = Parser.new

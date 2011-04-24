@@ -1,8 +1,8 @@
 == FEATURES/PROBLEMS:
 
 * Applying transforms to query vectors
-* Detect the optimal dimension reduction in LSA.
-* Allow objects to be passed in as transforms.
+* Detect the optimal dimension reduction in LSA. => run a benchmark
+* Allow objects to be passed in as transforms. => hashes
 * Implement Probabilistic latent semantic analysis
 * Implement Latent Dirichlet Allocation
 
