@@ -1,8 +1,11 @@
 == FEATURES/PROBLEMS:
 
 * Applying transforms to query vectors
-* Detect the optimal dimension reduction in LSA. => run a benchmark
-* Allow objects to be passed in as transforms. => hashes
+* Allow objects to be passed in as transforms.
+  * Hashes might be enough, but a faster data structure might be a good option.
+* Detect the optimal dimension reduction in LSA.
+  * This needs some benchmark. Low number of dimensions can be effective enough.
+  * http://nlp.stanford.edu/IR-book/html/htmledition/latent-semantic-indexing-1.html
 * Implement Probabilistic latent semantic analysis
 * Implement Latent Dirichlet Allocation
 
