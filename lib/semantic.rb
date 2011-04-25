@@ -10,7 +10,7 @@ require "semantic/transform"
 require "semantic/version"
 
 require 'rubygems'
-require 'linalg'
+require 'gsl'
 #http://rubyforge.org/projects/stemmer/
 #A processor for removing the commoner morphological and inflexional endings from words in English
 require 'stemmer'
@@ -21,7 +21,7 @@ module Semantic
   class << self
     attr_writer :logger
   end
-  
+
   def self.logger
     return @logger if @logger
     @logger = Logger.new(STDOUT)
@@ -29,5 +29,5 @@ module Semantic
     @logger.level = Logger::ERROR
     @logger
   end
-  
+
 end

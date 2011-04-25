@@ -13,10 +13,19 @@ module Semantic
 
       def build_document_matrix(documents)
         @vector_keyword_index = build_vector_keyword_index(documents)
-       
+
         document_vectors = documents.enum_for(:each_with_index).map{|document,document_id| build_vector(document, document_id)}
-        document_matrix = Linalg::DMatrix.join_columns(document_vectors)
-        
+
+        n = document_vectors.size
+        m = document_vectors.first.size
+        document_matrix = GSL::Matrix.alloc(m, n)
+
+        document_vectors.each_with_index do |vector, index|
+          vector.enum_for(:each).with_index do |value, index2|
+            document_matrix[index2, index] = value
+          end
+        end
+
         Model.new(document_matrix, @vector_keyword_index)
       end
 
@@ -28,7 +37,7 @@ module Semantic
       def build_vector_keyword_index(documents)
         parse_and_cache(documents)
         vocabulary_list = find_unique_vocabulary
-	      map_vocabulary_to_vector_positions(vocabulary_list)
+        map_vocabulary_to_vector_positions(vocabulary_list)
       end
 
       def parse_and_cache(documents)
@@ -41,26 +50,30 @@ module Semantic
         vocabulary_list = @parsed_document_cache.inject([]) { |parsed_document, vocabulary_list| vocabulary_list + parsed_document  }
         vocabulary_list.uniq
       end
-      
+
       def map_vocabulary_to_vector_positions(vocabulary_list)
         vector_index={}
         column = 0
-	      vocabulary_list.each do |word|
+        vocabulary_list.each do |word|
           vector_index[word] = column
           column += 1
         end
         vector_index
-      end 
-    
+      end
+
       def build_vector(word_string, document_id=nil)
         if document_id.nil?
           word_list = @parser.tokenise_and_filter(word_string)
         else
           word_list = @parsed_document_cache[document_id]
         end
-        
-        vector = Linalg::DMatrix.new(@vector_keyword_index.length, 1)
-        word_list.each { |word| vector[@vector_keyword_index[word] , 0] += 1 if @vector_keyword_index.has_key?(word)  }
+
+        vector = GSL::Vector.alloc(@vector_keyword_index.length)
+        word_list.each { |word|
+          if @vector_keyword_index.has_key?(word)
+            vector[@vector_keyword_index[word]] += 1
+          end
+        }
         vector
       end
 
