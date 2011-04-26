@@ -1,5 +1,6 @@
 require 'stemmer'
 
+require "set"
 module Semantic
   class Parser
 
@@ -8,6 +9,7 @@ module Semantic
       #TODO: nicer way to reference stop file location?
       File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
         @stopwords = file.read().split()
+        @stopwords = Set.new(file.read().split())
       end
     end
 
