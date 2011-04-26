@@ -47,8 +47,7 @@ module Semantic
       end
 
       def find_unique_vocabulary
-        vocabulary_list = @parsed_document_cache.inject([]) { |parsed_document, vocabulary_list| vocabulary_list + parsed_document  }
-        vocabulary_list.uniq
+        @parsed_document_cache.flatten.reverse.uniq
       end
 
       def map_vocabulary_to_vector_positions(vocabulary_list)
