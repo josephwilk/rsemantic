@@ -9,11 +9,9 @@ module Semantic
 
           if number_of_dimensions_to_reduce <= columns #Its a valid reduction
             # u, sigma, vt = matrix.singular_value_decomposition
-            u, vt, sigma = matrix.SV_decomp
+            u, vt, sigma = matrix.SV_decomp_mod
             sigma = GSL::Matrix.diagonal(sigma)
-
             sigma_prime = reduce_dimensions(number_of_dimensions_to_reduce, sigma)
-            # sigma_prime = sigma
 
             matrix_prime = u * sigma_prime * vt
           else
