@@ -13,12 +13,18 @@ Documentation: http://github.com/josephwilk/rsemantic/wikis/home
 
 == REQUIREMENTS:
 
-* Linalg - http://rubyforge.org/projects/linalg/
+* GSL - http://www.gnu.org/software/gsl
 * stemmer - http://rubyforge.org/projects/stemmer/
 
 == INSTALL:
 
 * git clone git://github.com/josephwilk/rsemantic.git
+* brew install GSL
+* gem install GSL
+
+== Contributors
+* @josephwilk
+* @dominikhonnef
 
 == LICENSE
 
