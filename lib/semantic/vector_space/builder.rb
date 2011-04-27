@@ -5,9 +5,8 @@ module Semantic
     #separate term. If a term occurs in the document, then the value in the vector is non-zero.
     class Builder
 
-      def initialize(options={})
+      def initialize
         @parser = Parser.new
-        @options = options
         @parsed_document_cache = []
       end
 

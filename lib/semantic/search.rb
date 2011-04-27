@@ -2,10 +2,15 @@ module Semantic
   class Search
 
     def initialize(documents, options={})
+      options = {
+        :transforms => [:TFIDF, :LSA],
+        :verbose    => false,
+      }.merge(options)
       Semantic.logger.level = options[:verbose] ? Logger::INFO : Logger::ERROR
 
-      @builder = VectorSpace::Builder.new(options)
-      @matrix_transformer = MatrixTransformer.new(options)
+
+      @builder = VectorSpace::Builder.new
+      @matrix_transformer = MatrixTransformer.new(options[:transforms])
 
       @vector_space_model = @builder.build_document_matrix(documents)
 

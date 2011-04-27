@@ -1,9 +1,8 @@
 module Semantic
   class MatrixTransformer
 
-    def initialize(options={})
-      @transforms = options[:transforms] || [:TFIDF, :LSA]
-      @options = options
+    def initialize(transforms)
+      @transforms = transforms
     end
 
     def apply_transforms(vector_space_model)
