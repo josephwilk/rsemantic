@@ -7,6 +7,7 @@ module Semantic
       # English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
       # TODO: nicer way to reference stop file location?
       @filter_stop_words = options[:filter_stop_words]
+      @stem_words        = options[:stem_words]
       if @filter_stop_words
         File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
           @stopwords = Set.new(file.read().split())
@@ -40,7 +41,11 @@ module Semantic
       string = clean(string)
       words = string.split(" ")
 
-      words.map {|word| Stemmer.stem_word(word) }
+      if @stem_words
+        words.map {|word| Stemmer.stem_word(word) }
+      else
+        words
+      end
     end
 
   end

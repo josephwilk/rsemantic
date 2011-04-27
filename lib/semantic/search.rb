@@ -6,11 +6,12 @@ module Semantic
         :transforms => [:TFIDF, :LSA],
         :verbose    => false,
         :filter_stop_words => true,
+        :stem_words => true,
       }.merge(options)
       Semantic.logger.level = options[:verbose] ? Logger::INFO : Logger::ERROR
 
 
-      @builder = VectorSpace::Builder.new(:filter_stop_words => options[:filter_stop_words])
+      @builder = VectorSpace::Builder.new(:filter_stop_words => options[:filter_stop_words], :stem_words => options[:stem_words])
       @matrix_transformer = MatrixTransformer.new(options[:transforms])
 
       @vector_space_model = @builder.build_document_matrix(documents)
