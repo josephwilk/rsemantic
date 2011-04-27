@@ -55,7 +55,7 @@ module Semantic
         vector_index
       end
 
-      def build_vector(word_string, document_id=nil)
+      def build_vector(word_string, document_id = nil)
         if document_id.nil?
           word_list = @parser.tokenise_and_filter(word_string)
         else

@@ -1,7 +1,7 @@
 module Semantic
   class Search
 
-    def initialize(documents, options={})
+    def initialize(documents, options = {})
       options = {
         :transforms => [:TFIDF, :LSA],
         :verbose    => false,
@@ -19,22 +19,21 @@ module Semantic
       @vector_space_model = @matrix_transformer.apply_transforms(@vector_space_model)
     end
 
-    def related(documentId)
+    def related(document_id)
       ratings = []
-      for index in (0...@vector_space_model.size2)
-        ratings << Compare.similarity(@vector_space_model.column(documentId), @vector_space_model.column(index))
+      @vector_space_model.each_column do |column|
+        ratings << Compare.similarity(@vector_space_model.column(document_id), column)
       end
       ratings
     end
 
-    def search(searchList)
+    def search(search_list)
       ratings = []
-      query_vector = @builder.build_query_vector(searchList)
-      for index in (0...@vector_space_model.size2)
-        ratings << Compare.similarity(query_vector, @vector_space_model.column(index))
+      query_vector = @builder.build_query_vector(search_list)
+      @vector_space_model.each_column do |column|
+        ratings << Compare.similarity(query_vector, column)
       end
       ratings
     end
-
   end
 end
