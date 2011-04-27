@@ -22,19 +22,7 @@ module Semantic
       end
 
       def self.number_of_documents_with_term(row_index, matrix)
-        return @@number_of_documents_with_term[row_index] unless @@number_of_documents_with_term[row_index].nil?
-
-        term_document_occurences = 0
-
-        rows,cols = matrix.shape
-
-        for n in (0...cols)
-          if matrix[row_index, n] > 0 #Term appears in document
-            term_document_occurences += 1
-          end
-        end
-        @@number_of_documents_with_term[row_index] = term_document_occurences
-        @@number_of_documents_with_term[row_index]
+        @@number_of_documents_with_term[row_index] ||= matrix.row(row_index).where.size
       end
 
     end
