@@ -3,11 +3,14 @@ require "set"
 module Semantic
   class Parser
 
-    def initialize
+    def initialize(options = {})
       #English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
       #TODO: nicer way to reference stop file location?
-      File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
-        @stopwords = Set.new(file.read().split())
+      @filter_stop_words = options[:filter_stop_words]
+      if @filter_stop_words
+        File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
+          @stopwords = Set.new(file.read().split())
+        end
       end
     end
 
@@ -26,7 +29,11 @@ module Semantic
 
     #stop words are common words which have no search value
     def remove_stop_words(list)
-      list.select {|word| !@stopwords.include?(word) }
+      if @filter_stop_words
+        list.select {|word| !@stopwords.include?(word) }
+      else
+        list
+      end
     end
 
     def tokenise_and_stem(string)
