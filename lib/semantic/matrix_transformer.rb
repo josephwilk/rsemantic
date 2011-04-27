@@ -13,7 +13,7 @@ module Semantic
           Semantic.logger.info("Applying #{transform} transform")
           vector_space_model.matrix = transform_class.send(:transform, vector_space_model.matrix) if transform_class.respond_to?(:transform)
           Semantic.logger.info(vector_space_model)
-        rescue Exception => e
+        rescue => e
           Semantic.logger.error("Error: Cannot perform transform: #{transform}")
           Semantic.logger.error(e)
         end
