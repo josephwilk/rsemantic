@@ -18,13 +18,9 @@ module Semantic
 
         n = document_vectors.size
         m = document_vectors.first.size
-        document_matrix = GSL::Matrix.alloc(m, n)
 
-        document_vectors.each_with_index do |vector, index|
-          vector.enum_for(:each).with_index do |value, index2|
-            document_matrix[index2, index] = value
-          end
-        end
+        # TODO check where else we use document_vectors and if we can directly use column based ones
+        document_matrix = GSL::Matrix.alloc(*document_vectors.map {|v| v.transpose})
 
         Model.new(document_matrix, @vector_keyword_index)
       end
@@ -73,9 +69,9 @@ module Semantic
             vector[@vector_keyword_index[word]] += 1
           end
         }
+
         vector
       end
-
     end
   end
 end
