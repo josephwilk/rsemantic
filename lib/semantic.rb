@@ -11,8 +11,8 @@ require "semantic/version"
 
 require 'rubygems'
 require 'gsl'
-#http://rubyforge.org/projects/stemmer/
-#A processor for removing the commoner morphological and inflexional endings from words in English
+# http://rubyforge.org/projects/stemmer/
+# A processor for removing the commoner morphological and inflexional endings from words in English
 require 'stemmer'
 require 'logger'
 

@@ -1,8 +1,8 @@
 module Semantic
   module VectorSpace
-    #A algebraic model for representing text documents as vectors of identifiers.
-    #A document is represented as a vector. Each dimension of the vector corresponds to a
-    #separate term. If a term occurs in the document, then the value in the vector is non-zero.
+    # A algebraic model for representing text documents as vectors of identifiers.
+    # A document is represented as a vector. Each dimension of the vector corresponds to a
+    # separate term. If a term occurs in the document, then the value in the vector is non-zero.
     class Builder
 
       def initialize(options = {})

@@ -4,8 +4,8 @@ module Semantic
   class Parser
 
     def initialize(options = {})
-      #English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
-      #TODO: nicer way to reference stop file location?
+      # English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
+      # TODO: nicer way to reference stop file location?
       @filter_stop_words = options[:filter_stop_words]
       if @filter_stop_words
         File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
@@ -19,7 +19,7 @@ module Semantic
       remove_stop_words(word_list)
     end
 
-    #remove any nasty grammar tokens from string
+    # remove any nasty grammar tokens from string
     def clean(string)
       string = string.gsub(".","")
       string = string.gsub(/\s+/," ")
@@ -27,7 +27,7 @@ module Semantic
       return string
     end
 
-    #stop words are common words which have no search value
+    # stop words are common words which have no search value
     def remove_stop_words(list)
       if @filter_stop_words
         list.select {|word| !@stopwords.include?(word) }
