@@ -14,15 +14,15 @@ module Semantic
     end
 
     def query_vector
-      @query_vector ||= Linalg::DMatrix.columns([[1,0]])
+      @query_vector ||= GSL::Matrix[[1,0]]
     end
 
     def vector_space_model(stubs = {})
-      @vector_space_model ||= VectorSpace::Model.new(Linalg::DMatrix.rows([[0,1],[1,0]]), {})
+      @vector_space_model ||= VectorSpace::Model.new(GSL::Matrix[[0,1],[1,0]], {})
     end
 
     def matrix(array)
-      Linalg::DMatrix.rows(array)
+      GSL::Matrix(array)
     end
 
     def vector(vector)
@@ -79,8 +79,8 @@ module Semantic
         MatrixTransformer.stub!(:new).and_return(mock_matrix_transformer)
         mock_matrix_transformer.stub!(:apply_transforms).and_return(vector_space_model)
 
-        Compare.should_receive(:cosine).with(matrix([[0],[1]]), matrix([[0],[1]]))
-        Compare.should_receive(:cosine).with(matrix([[0],[1]]), matrix([[1],[0]]))
+        Compare.should_receive(:cosine).with(DSL::Matrix[[0],[1]], DSL::Matrix[[0],[1]])
+        Compare.should_receive(:cosine).with(DSL::Matrix[[0],[1]], DSL::Matrix[[1],[0]])
 
         vector_search = Search.new(documents)
 

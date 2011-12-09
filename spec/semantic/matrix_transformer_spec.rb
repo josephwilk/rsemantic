@@ -8,7 +8,7 @@ module Semantic
     end
 
     def mock_vector_space
-      mock("vector space", :matrix => Linalg::DMatrix.rows([[1,0],[0,1]]), :matrix= => nil )
+      mock("vector space", :matrix => GSL::Matrix[[1,0],[0,1]], :matrix= => nil )
     end
 
 

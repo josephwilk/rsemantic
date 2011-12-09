@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    gsl (1.14.7)
+      narray (>= 0.5.9)
+    narray (0.6.0.1)
+    stemmer (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  gsl
+  stemmer
