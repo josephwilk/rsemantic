@@ -9,6 +9,10 @@ require "semantic/search"
 require "semantic/transform"
 require "semantic/version"
 
+require "semantic/corpus"
+require "semantic/document"
+require "semantic/search_result"
+
 require 'rubygems'
 require 'gsl'
 # http://rubyforge.org/projects/stemmer/
