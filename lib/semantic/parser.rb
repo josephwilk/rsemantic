@@ -9,7 +9,7 @@ module Semantic
       @filter_stop_words = options[:filter_stop_words]
       @stem_words        = options[:stem_words]
       if @filter_stop_words
-        File.open(File.dirname(__FILE__)+'/../../resources/english.stop', 'r') do |file|
+        File.open(File.dirname(__FILE__) + '/../../resources/english.stop', 'r') do |file|
           @stopwords = Set.new(file.read().split())
         end
       end

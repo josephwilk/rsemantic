@@ -7,7 +7,7 @@ module Semantic
       file = mock("file")
       file.stub!(:read).and_return("a to be")
       File.stub!(:open).and_yield(file)
-      parser = Parser.new
+      parser = Parser.new(:filter_stop_words => true)
 
       parser.remove_stop_words(['a','house']).should == ['house']
     end

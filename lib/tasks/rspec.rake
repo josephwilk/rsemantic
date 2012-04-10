@@ -2,11 +2,11 @@ begin
   require 'spec'
 rescue LoadError
   require 'rubygems'
-  require 'spec'
+  require 'rspec'
 end
 begin
-  require 'spec/rake/spectask'
-  require 'spec/rake/verify_rcov'
+  require 'rspec/rake/spectask'
+  require 'rspec/rake/verify_rcov'
 rescue LoadError
   puts <<-EOS
 To use rspec for testing you must install rspec gem:

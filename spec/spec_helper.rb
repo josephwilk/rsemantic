@@ -1,6 +1,5 @@
 require 'rubygems'
-gem 'rspec'
-require 'spec'
+require 'rspec'
 
 $:.unshift(File.join(File.dirname(__FILE__), %w[.. lib]))
 
