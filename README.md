@@ -1,8 +1,4 @@
-= Rsemantic
-
-* http://github.com/josephwilk/rsemantic
-
-== DESCRIPTION:
+# Rsemantic
 
 A Ruby document vector search with flexible matrix transforms. Current supported transforms: 
 
@@ -11,26 +7,26 @@ A Ruby document vector search with flexible matrix transforms. Current supported
 
 Documentation: http://github.com/josephwilk/rsemantic/wikis/home
 
-== REQUIREMENTS:
+## Requirements:
 
 * GSL - http://www.gnu.org/software/gsl
 * stemmer - http://rubyforge.org/projects/stemmer/
 
-== INSTALL:
+## INSTALL:
 
 * git clone git://github.com/josephwilk/rsemantic.git
 * brew install GSL
 * gem install GSL
 
-== Contributors
+## Contributors
 * @josephwilk
 * @dominikhonnef
 
-== LICENSE
+## LICENSE
 
 (The MIT License)
 
-Copyright (c) 2008 Joseph Wilk
+Copyright (c) 2008-2012 Joseph Wilk
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
