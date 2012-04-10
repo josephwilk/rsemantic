@@ -1,5 +1,7 @@
 # Rsemantic
 
+[![Build Status](https://secure.travis-ci.org/josephwilk/rsemantic.png?branch=master)](http://travis-ci.org/josephwilk/rsemantic)
+
 A Ruby document vector search with flexible matrix transforms. Current supported transforms: 
 
 * Latent semantic analysis
