@@ -19,9 +19,10 @@ Documentation: http://github.com/josephwilk/rsemantic/wikis/home
 Note 'brew install GSL' installs 1.15 which is not supported yet by the gsl gem. So you have to switch your GSL version to 1.14.
 See here for details on how to do that with homebrew: http://bretthard.in/2012/03/getting-related_posts-lsi-and-gsl-to-work-in-jekyll/
 
-* git clone git://github.com/josephwilk/rsemantic.git
-* brew install GSL
-* gem install GSL
+<pre><code>git clone git://github.com/josephwilk/rsemantic.git
+brew install GSL
+gem install GSL
+</code></pre>
 
 ## Contributors
 * @josephwilk
