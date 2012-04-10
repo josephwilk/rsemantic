@@ -21,7 +21,8 @@ See here for details on how to do that with homebrew: http://bretthard.in/2012/0
 
 <pre><code>git clone git://github.com/josephwilk/rsemantic.git
 brew install GSL
-gem install GSL
+
+bundle install
 </code></pre>
 
 ## Contributors
