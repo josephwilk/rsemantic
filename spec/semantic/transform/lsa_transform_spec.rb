@@ -24,8 +24,6 @@ module Semantic
 
         matrix.should_receive(:singular_value_decomposition).and_return([u, sigma, vt])
 
-        GSL::Matrix.stub!(:columns).and_return(matrix)
-
         Transform::LSA.transform!(matrix)
       end
 
@@ -34,7 +32,6 @@ module Semantic
                              [1.0, 0.0, 1.0]]
 
         matrix.stub!(:singular_value_decomposition).and_return([u, sigma, vt])
-        GSL::Matrix.stub!(:columns).and_return(matrix)
 
         sigma.should_receive(:[]=).with(0,0,0)
         sigma.should_receive(:[]=).with(1,1,0)
