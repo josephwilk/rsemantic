@@ -14,7 +14,7 @@ module Semantic
                      [1,0,0]]
 
     sigma = GSL::Matrix[[1,0,0],
-                         [0,1,0]]
+                        [0,1,0]]
 
     describe "latent semantic analysis transform" do
 
@@ -30,8 +30,8 @@ module Semantic
       end
 
       it "should reduce the noise in the sigma matrix" do
-        matrix = GSL::Matrix [[0.0, 1.0, 0.0],
-                              [1.0, 0.0, 1.0]]
+        matrix = GSL::Matrix[[0.0, 1.0, 0.0],
+                             [1.0, 0.0, 1.0]]
 
         matrix.stub!(:singular_value_decomposition).and_return([u, sigma, vt])
         GSL::Matrix.stub!(:columns).and_return(matrix)
