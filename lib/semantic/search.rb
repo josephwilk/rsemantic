@@ -33,7 +33,7 @@ module Semantic
       ratings = []
       query_vector = @builder.build_query_vector(search_list)
       @vector_space_model.each_column do |column|
-        ratings << Compare.similarity(query_vector, column)
+        ratings << Compare.similarity(query_vector.to_v.col, column)
       end
       ratings
     end

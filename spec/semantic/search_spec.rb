@@ -79,8 +79,8 @@ module Semantic
         MatrixTransformer.stub!(:new).and_return(mock_matrix_transformer)
         mock_matrix_transformer.stub!(:apply_transforms).and_return(vector_space_model)
 
-        Compare.should_receive(:cosine).with(GSL::Matrix[[0],[1]], GSL::Matrix[[0],[1]])
-        Compare.should_receive(:cosine).with(GSL::Matrix[[0],[1]], GSL::Matrix[[1],[0]])
+        Compare.should_receive(:cosine).with(GSL::Vector[0,1], GSL::Vector[0,1])
+        Compare.should_receive(:cosine).with(GSL::Vector[0,1], GSL::Vector[1,0])
 
         vector_search = Search.new(documents)
 
