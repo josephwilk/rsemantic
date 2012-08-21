@@ -3,7 +3,7 @@ require "semantic/version"
 
 Gem::Specification.new do |s|
   s.name = %q{rsemantic}
-  s.version = Semantic::Version::STRING
+  s.version = Semantic::VERSION::STRING
   s.platform    = Gem::Platform::RUBY
   s.license     = "MIT"
   s.homepage = %q{http://github.com/josephwilk/rsemantic}
