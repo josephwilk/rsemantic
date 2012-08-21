@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A document vector search with flexible matrix transforms. Currently supports Latent semantic analysis and Term frequency - inverse document frequency}
   s.email = ["joe@josephwilk.net"]
   s.extra_rdoc_files = ["History.txt", "README.md", "TODO.txt"]
-  s.files = Dir.glob("{lib}/**/*")
+  s.files = Dir.glob("{lib}/**/*") + Dir.glob("{resources}/*")
 
   s.rdoc_options     = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
