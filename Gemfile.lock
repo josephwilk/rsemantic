@@ -17,7 +17,7 @@ GEM
       multi_json
       multi_xml
     json (1.6.6)
-    limited_red (0.3.7)
+    limited_red (0.4.3)
       cucumber (>= 1.1.4)
       httparty (= 0.8.1)
     multi_json (1.2.0)
