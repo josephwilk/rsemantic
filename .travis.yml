@@ -11,4 +11,5 @@ notifications:
     - joe@josephwilk.net
 
 before_install:
- - sudo apt-get install libgsl0-dev
+  - wget ftp.gnu.org/gnu/gsl/gsl-1.14.tar.gz && tar xf gsl-1.14.tar.gz
+  - cd gsl-1.14 && ./configure && make && sudo make install
