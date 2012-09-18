@@ -9,3 +9,6 @@ branches:
 notifications:
   email:
     - joe@josephwilk.net
+
+before_install:
+ - sudo apt-get install libgsl0-dev
