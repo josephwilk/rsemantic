@@ -12,5 +12,4 @@ notifications:
 
 before_install:
   - wget ftp.gnu.org/gnu/gsl/gsl-1.14.tar.gz && tar xf gsl-1.14.tar.gz
-  - cd gsl-1.14 && ./configure && make && sudo make install
-  - ldconfig /usr/local/lib
+  - cd gsl-1.14 && ./configure && make && sudo make install && sudo ldconfig /usr/local/lib
