@@ -3,40 +3,21 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 module Semantic
   describe Transform::LSA do
 
-    tiny_matrix = GSL::Matrix[[0.0, 1.0, 0.0],
-                              [1.0, 0.0, 1.0]]
+    let(:matrix){
+      matrix = GSL::Matrix[[0.0, 1.0, 0.0],
+                           [1.0, 0.0, 1.0],
+                           [1.0, 0.0, 1.0]]
 
-    u = GSL::Matrix[[1,0],
-                     [0,1]]
-
-    vt = GSL::Matrix[[1,0,0],
-                     [1,0,0],
-                     [1,0,0]]
-
-    sigma = GSL::Matrix[[1,0,0],
-                        [0,1,0]]
+    }
 
     describe "latent semantic analysis transform" do
 
       it "should use svd on matrix" do
-        matrix = GSL::Matrix[[0.0, 1.0, 0.0],
-                             [1.0, 0.0, 1.0]]
+        u, vt, sigma = matrix.SV_decomp_mod
 
-        matrix.should_receive(:singular_value_decomposition).and_return([u, sigma, vt])
+        matrix.should_receive(:SV_decomp_mod).and_return([u, vt, sigma])
 
         Transform::LSA.transform!(matrix)
-      end
-
-      it "should reduce the noise in the sigma matrix" do
-        matrix = GSL::Matrix[[0.0, 1.0, 0.0],
-                             [1.0, 0.0, 1.0]]
-
-        matrix.stub!(:singular_value_decomposition).and_return([u, sigma, vt])
-
-        sigma.should_receive(:[]=).with(0,0,0)
-        sigma.should_receive(:[]=).with(1,1,0)
-
-        Transform::LSA.transform!(matrix, 2)
       end
 
       it "should prevent reducing dimensions greater than the matrixes own dimensions" do
@@ -44,10 +25,10 @@ module Semantic
       end
 
       it "should transform LSA matrix" do
-        transformed_matrix = Transform::LSA.transform! tiny_matrix
+        transformed_matrix = Transform::LSA.transform! matrix
 
         #TODO: better way to compare result matrix
-        transformed_matrix.to_s.should == GSL::Matrix[[0,0,0],[1,0,1]].to_s
+        transformed_matrix.to_s.should == "[  -0.000e+00  1.000e+00 -3.331e-16 \n   1.000e+00  1.110e-16  1.000e+00 \n   1.000e+00  2.220e-16  1.000e+00 ]"
       end
 
     end
