@@ -69,7 +69,7 @@ module Semantic
           end
         }
 
-        vector
+        vector.respond_to?(:to_v) ? vector.to_v : vector
       end
     end
   end

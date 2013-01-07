@@ -14,7 +14,7 @@ module Semantic
     end
 
     def query_vector
-      @query_vector ||= GSL::Matrix[[1,0]]
+      @query_vector ||= GSL::Matrix[[1,0]].to_v
     end
 
     def vector_space_model(stubs = {})
