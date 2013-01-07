@@ -6,7 +6,7 @@ module Semantic
     let(:matrix){
       matrix = GSL::Matrix[[0.0, 1.0, 0.0],
                            [1.0, 0.0, 1.0],
-                           [1.0, 0.0, 1.0]]
+                           [0.0, 0.0, 1.0]]
 
     }
 
@@ -27,11 +27,21 @@ module Semantic
       it "should transform LSA matrix" do
         transformed_matrix = Transform::LSA.transform! matrix
 
-        #TODO: better way to compare result matrix
-        transformed_matrix.to_s.should == "[  -0.000e+00  1.000e+00 -3.331e-16 \n   1.000e+00  1.110e-16  1.000e+00 \n   1.000e+00  2.220e-16  1.000e+00 ]"
+#        pending("better, less fragile way to compare result matrix.")
+
+
+        transformed_matrix[0].should be_within(0.1).of(0)
+        transformed_matrix[1].should be_within(0.1).of(1.0)
+        transformed_matrix[2].should be_within(0.1).of(0)
+        transformed_matrix[3].should be_within(0.1).of(0.7)
+        transformed_matrix[4].should be_within(0.1).of(0)
+        transformed_matrix[5].should be_within(0.1).of(1.1)
+        transformed_matrix[6].should be_within(0.1).of(0.4)
+        transformed_matrix[7].should be_within(0.1).of(0)
+        transformed_matrix[8].should be_within(0.1).of(0.7)
       end
 
     end
 
-  end
+   end
 end
