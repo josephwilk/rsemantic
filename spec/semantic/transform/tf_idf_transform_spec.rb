@@ -24,10 +24,10 @@ module Semantic
         Transform::TFIDF.transform!(GSL::Matrix[[0,0],[0,0]])
       end
 
-      it "should calculate term frequency * inverse document freuency" do
+      it "should calculate term frequency * inverse document frequency" do
         transformed_matrix = Transform::TFIDF.transform! GSL::Matrix[[1,1],[0,1]]
 
-        transformed_matrix.to_s.should == GSL::Matrix[[0, 0],[0, 0.346574]].to_s
+        transformed_matrix.to_s.should == GSL::Matrix[[1.0, 0],[1.0, 1.0]].to_s
       end
 
     end
