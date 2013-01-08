@@ -13,8 +13,8 @@ module Semantic
       
       it "should output keywords for the matrix rows" do
         model = Model.new(GSL::Matrix[[0]], {'shiva' => 0})
-        
-        model.to_s.should include("shiva [ +0.00 ]")
+
+        model.to_s.should include("shiva     [ +0.00 ]")
       end
 
     end
