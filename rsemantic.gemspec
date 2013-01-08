@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
   s.require_paths    = ["lib"]
 
   s.add_runtime_dependency(%q<gsl>, ["= 1.14.7"])
-  s.add_runtime_dependency(%q<fast_stemmer>, [">= 1.0.1"])
+  s.add_runtime_dependency(%q<fast-stemmer>, [">= 1.0.1"])
 end
