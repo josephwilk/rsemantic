@@ -8,7 +8,7 @@ module Semantic
       # TODO: nicer way to reference stop file location?
       @filter_stop_words = options[:filter_stop_words]
       @stem_words        = options[:stem_words]
-      locale            = options[:locale] || 'en'
+      locale             = options[:locale] || 'en'
 
       if @filter_stop_words
         File.open("#{File.dirname(__FILE__)}/../../resources/#{locale}.stop", 'r') do |file|
