@@ -1,0 +1,6 @@
+English: ftp://ftp.cs.cornell.edu/pub/smart/english.stop
+German: http://solariz.de/wp-content/files/stopwords.txt
+Arabic, Catalan, Czech, Danish, Dutch, Finnish,
+French, Greek, Hungarian, Italian, Japanese, Norwegian, Polish,
+Portuguese, Russian, Spanish, Swedish, Turkish: http://www.ranks.nl/resources/stopwords.html
+Indonesian: http://yudiwbs.wordpress.com/2008/07/23/stop-words-untuk-bahasa-indonesia/
