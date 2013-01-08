@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'gsl'
-gem 'stemmer'
+gem 'fast-stemmer'
 
 group :test, :development do
   gem 'rspec'
