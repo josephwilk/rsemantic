@@ -6,7 +6,7 @@ module Semantic
       file = mock "file"
       file.stub!(:read).and_return("un una todo")
       File.stub!(:open).and_yield(file)
-      parser = Parser.new 'es'
+      parser = Parser.new(:locale => 'es', :filter_stop_words => true)
 
       parser.remove_stop_words(['hola','una']).should == ['hola']
     end
