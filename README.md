@@ -12,7 +12,6 @@ Documentation: http://github.com/josephwilk/rsemantic/wikis/home
 ## Requirements:
 
 * GSL - http://www.gnu.org/software/gsl
-* stemmer - http://rubyforge.org/projects/stemmer/
 
 ## INSTALL:
 
