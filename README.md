@@ -26,7 +26,7 @@ brew install gsl114
 bundle install</code></pre>
 
 ## Contributors
-* @josephwilk
+* [@josephwilk](http://blog.josephwilk.net)
 * @dominikhonnef
 
 ## LICENSE
