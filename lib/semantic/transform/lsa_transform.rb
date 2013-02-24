@@ -8,11 +8,14 @@ module Semantic
           # TODO configurable rank
           columns = matrix.size2
 
-          u, v, sigma = matrix.SV_decomp_mod
+          # if M < N perform SVD on transponsed matrix
+          matrix.size1 < matrix.size2 ? (u, v, sigma = matrix.transpose.SV_decomp_mod) : (u, v, sigma = matrix.SV_decomp_mod)
+
           reduce_dimensions!(sigma, rank)
           sigma = GSL::Matrix.diagonal(sigma)
 
-          GSL::Matrix.swap(matrix, u * sigma * v.transpose)
+          # if M < N return transposed result
+          matrix.size1 < matrix.size2 ? GSL::Matrix.swap(matrix, (u * sigma * v.transpose).transpose) : GSL::Matrix.swap(matrix, u * sigma * v.transpose)
         end
 
         private

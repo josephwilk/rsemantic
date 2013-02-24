@@ -3,11 +3,16 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 module Semantic
   describe Transform::LSA do
 
-    let(:matrix){
+    let(:matrix) {
       matrix = GSL::Matrix[[0.0, 1.0, 0.0],
                            [1.0, 0.0, 1.0],
                            [0.0, 0.0, 1.0]]
 
+    }
+
+    let(:tiny_matrix) {
+      tiny_matrix = GSL::Matrix[[0.0, 1.0, 0.0],
+                                [1.0, 0.0, 1.0]]
     }
 
     describe "latent semantic analysis transform" do
@@ -41,7 +46,22 @@ module Semantic
         transformed_matrix[8].should be_within(0.1).of(0.7)
       end
 
+      it "should transform LSA matrix when M < N" do
+        transformed_matrix = nil
+
+        expect {
+          transformed_matrix = Transform::LSA.transform! tiny_matrix
+        }.to_not raise_error
+
+        transformed_matrix[0].should be_within(0.1).of(0)
+        transformed_matrix[1].should be_within(0.1).of(0)
+        transformed_matrix[2].should be_within(0.1).of(0)
+        transformed_matrix[3].should be_within(0.1).of(1.0)
+        transformed_matrix[4].should be_within(0.1).of(0)
+        transformed_matrix[5].should be_within(0.1).of(1.0)
+      end
+
     end
 
-   end
+  end
 end
