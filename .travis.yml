@@ -1,3 +1,4 @@
+language: ruby
 rvm: 
   - 1.8.7
   - 1.9.2
@@ -15,3 +16,4 @@ notifications:
 before_install:
   - wget ftp.gnu.org/gnu/gsl/gsl-1.14.tar.gz && tar xf gsl-1.14.tar.gz
   - cd gsl-1.14 && ./configure && make && sudo make install && sudo ldconfig /usr/local/lib
+  - bundle install
