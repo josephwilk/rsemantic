@@ -15,15 +15,11 @@ Documentation: http://github.com/josephwilk/rsemantic/wikis/home
 
 ## INSTALL:
 
-Note 'brew install GSL' installs 1.15 which is not supported yet by the gsl gem. So you have to switch your GSL version to 1.14.
-With homebrew try this:
+Rsemantic requires GSL. With homebrew try this:
 
-<pre><code>git clone git://github.com/josephwilk/rsemantic.git
-cd rsemantic
-
-brew tap homebrew/versions
-brew install gsl114
-bundle install</code></pre>
+```
+brew install gsl
+```
 
 ## Contributors
 * [@josephwilk](http://blog.josephwilk.net)
