@@ -8,15 +8,15 @@ describe "rsemantic" do
                  "I haven't got a hat."]
 
     #Log to stdout how the matrix gets built and transformed
-    search = Semantic::Search.new(documents, :verbose => true)
+    search = RSemantic::Search.new(documents, :verbose => true)
 
     #We can pass different transforms to be performed. 
     #Currently only :LSA and :TFIDF. 
     #The order of transforms reflects the order they will be performed on the matrix
-    # search = Semantic::Search.new(documents, :transforms => [:LSA])
+    # search = RSemantic::Search.new(documents, :transforms => [:LSA])
 
     #Defaults to performing :TFIDF and then :LSA
-    # search = Semantic::Search.new(documents)
+    # search = RSemantic::Search.new(documents)
 
     #Find documents that are related to documents[0] with a ranking for how related they are.
     puts search.related(0)

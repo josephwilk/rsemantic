@@ -6,7 +6,7 @@ describe "for a bunch of documents" do
                 "A cat is a fine pet ponies.",
                 "Do and cats make good pets.",
                 "I haven't got a cat."]
-    @search = Semantic::Search.new(documents)             
+    @search = RSemantic::Search.new(documents)             
   end
 
   describe "finding the related document weightings" do

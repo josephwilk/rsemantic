@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module Semantic
+module RSemantic
   describe MatrixTransformer do
-    let(:mock_transform){ mock(Transform) }
-    let(:mock_vector_space){ mock("vector space", :matrix => GSL::Matrix[[1,0],[0,1]], :matrix= => nil ) }
+    let(:mock_transform){ double(Transform) }
+    let(:mock_vector_space){ double("vector space", :matrix => GSL::Matrix[[1,0],[0,1]], :matrix= => nil ) }
 
     describe "transforming matrix" do
 
@@ -16,7 +16,7 @@ module Semantic
 
       it "should send transform message to class to transform matrix" do
         matrix_transformer = MatrixTransformer.new(:transforms => [:LSA])
-        Transform.stub!(:const_get).and_return(mock_transform)
+        Transform.stub(:const_get).and_return(mock_transform)
 
         mock_transform.should_receive(:transform!)
 
@@ -28,7 +28,7 @@ module Semantic
         end
         
         matrix_transformer = MatrixTransformer.new(:transforms => [:DudTransform])
-        Transform.stub!(:const_get).and_return(DudTransform.new)
+        Transform.stub(:const_get).and_return(DudTransform.new)
 
         matrix_transformer.apply_transforms(mock_vector_space)
       end
