@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module RSemantic
+module Semantic
   describe Compare do
 
     it "should calculate cosine" do

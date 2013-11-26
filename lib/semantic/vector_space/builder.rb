@@ -1,4 +1,4 @@
-module RSemantic
+module Semantic
   module VectorSpace
     # A algebraic model for representing text documents as vectors of identifiers.
     # A document is represented as a vector. Each dimension of the vector corresponds to a

@@ -1,17 +1,17 @@
 $:.unshift(File.dirname(__FILE__)) unless
 $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-require "rsemantic/vector_space"
-require "rsemantic/compare"
-require "rsemantic/parser"
-require "rsemantic/matrix_transformer"
-require "rsemantic/search"
-require "rsemantic/transform"
-require "rsemantic/version"
+require "semantic/vector_space"
+require "semantic/compare"
+require "semantic/parser"
+require "semantic/matrix_transformer"
+require "semantic/search"
+require "semantic/transform"
+require "semantic/version"
 
-require "rsemantic/corpus"
-require "rsemantic/document"
-require "rsemantic/search_result"
+require "semantic/corpus"
+require "semantic/document"
+require "semantic/search_result"
 
 require 'rubygems'
 require 'gsl'
@@ -19,7 +19,7 @@ require 'gsl'
 require 'stemmer'
 require 'logger'
 
-module RSemantic
+module Semantic
 
   class << self
     attr_writer :logger

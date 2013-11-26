@@ -2,7 +2,7 @@ require 'gsl'
 require 'delegate'
 require 'stringio'
 
-module RSemantic
+module Semantic
   module VectorSpace
 
     class Model < DelegateClass(::GSL::Matrix)

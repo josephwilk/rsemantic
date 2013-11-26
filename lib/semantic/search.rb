@@ -1,4 +1,4 @@
-module RSemantic
+module Semantic
   class Search
 
     def initialize(documents, options = {})
@@ -8,7 +8,7 @@ module RSemantic
         :filter_stop_words => true,
         :stem_words => true,
       }.merge(options)
-      RSemantic.logger.level = options[:verbose] ? Logger::INFO : Logger::ERROR
+      Semantic.logger.level = options[:verbose] ? Logger::INFO : Logger::ERROR
 
 
       @builder = VectorSpace::Builder.new(:filter_stop_words => options[:filter_stop_words], :stem_words => options[:stem_words])
@@ -16,7 +16,7 @@ module RSemantic
 
       @vector_space_model = @builder.build_document_matrix(documents)
 
-      RSemantic.logger.info(@vector_space_model)
+      Semantic.logger.info(@vector_space_model)
 
       @vector_space_model = @matrix_transformer.apply_transforms(@vector_space_model)
     end

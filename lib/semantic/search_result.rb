@@ -1,4 +1,4 @@
-module RSemantic
+module Semantic
   class SearchResult
     include Comparable
 

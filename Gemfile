@@ -7,6 +7,5 @@ group :test, :development do
   gem 'rspec'
   gem 'limited_red'
   gem 'rake'
-  gem 'guard-rspec', require: false
 end
 

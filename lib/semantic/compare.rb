@@ -1,4 +1,4 @@
-module RSemantic
+module Semantic
   class Compare
 
     class << self
