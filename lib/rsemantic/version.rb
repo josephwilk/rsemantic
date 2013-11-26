@@ -1,4 +1,4 @@
-module Semantic #:nodoc:
+module RSemantic #:nodoc:
   class VERSION #:nodoc:
     MAJOR = 0
     MINOR = 2
