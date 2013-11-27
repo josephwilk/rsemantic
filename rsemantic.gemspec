@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
-require "semantic/version"
+require "rsemantic/version"
 
 Gem::Specification.new do |s|
   s.name             = %q{rsemantic}

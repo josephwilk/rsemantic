@@ -1,1 +1,0 @@
-%w{tf_idf lsa}.each{|f| require "semantic/transform/#{f}_transform.rb"}
