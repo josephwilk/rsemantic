@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module Semantic
+module RSemantic
   describe MatrixTransformer do
     let(:mock_transform){ mock(Transform) }
     let(:mock_vector_space){ mock("vector space", :matrix => GSL::Matrix[[1,0],[0,1]], :matrix= => nil ) }

@@ -1,4 +1,4 @@
-module Semantic
+module RSemantic
   module Transform
     class TFIDF
 

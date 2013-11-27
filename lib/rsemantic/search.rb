@@ -1,4 +1,4 @@
-module Semantic
+module RSemantic
   class Search
 
     def initialize(documents, options = {})

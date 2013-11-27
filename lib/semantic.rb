@@ -19,7 +19,7 @@ require 'gsl'
 require 'stemmer'
 require 'logger'
 
-module Semantic
+module RSemantic
 
   class << self
     attr_writer :logger

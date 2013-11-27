@@ -1,4 +1,4 @@
-module Semantic
+module RSemantic
   class Corpus
     # @return [Array<Document>]
     attr_reader :documents

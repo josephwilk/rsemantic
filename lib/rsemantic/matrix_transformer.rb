@@ -1,4 +1,4 @@
-module Semantic
+module RSemantic
   class MatrixTransformer
 
     def initialize(transforms)
