@@ -9,12 +9,12 @@ module RSemantic
       @transforms.each do |transform|
         begin
           transform_class = RSemantic::Transform.const_get(transform)
-          Semantic.logger.info("Applying #{transform} transform")
+          RSemantic.logger.info("Applying #{transform} transform")
           transform_class.transform!(vector_space_model.matrix)
-          Semantic.logger.info(vector_space_model)
+          RSemantic.logger.info(vector_space_model)
         rescue => e
-          Semantic.logger.error("Error: Cannot perform transform: #{transform}")
-          Semantic.logger.error(e)
+          RSemantic.logger.error("Error: Cannot perform transform: #{transform}")
+          RSemantic.logger.error(e)
         end
       end
       vector_space_model

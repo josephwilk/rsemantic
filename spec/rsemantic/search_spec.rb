@@ -93,7 +93,7 @@ module RSemantic
 
       before(:each) do
         @out = StringIO.new
-        Semantic.logger = Logger.new(@out)
+        RSemantic.logger = Logger.new(@out)
       end
 
       it "should set info level if in verbose mode" do
@@ -102,7 +102,7 @@ module RSemantic
 
         Search.new(['test'], :verbose => true)
         
-        Semantic.logger.level.should == Logger::INFO
+        RSemantic.logger.level.should == Logger::INFO
       end
       
       it "should set error level if not in verbose mode" do
@@ -111,7 +111,7 @@ module RSemantic
 
         Search.new(['test'], :verbose => false)
         
-        Semantic.logger.level.should == Logger::ERROR
+        RSemantic.logger.level.should == Logger::ERROR
       end
 
       it "should default to error level if verbose is not specified" do
@@ -120,7 +120,7 @@ module RSemantic
 
         Search.new(['test'])
         
-        Semantic.logger.level.should == Logger::ERROR
+        RSemantic.logger.level.should == Logger::ERROR
       end
 
     end
