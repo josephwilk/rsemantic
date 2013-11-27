@@ -8,7 +8,7 @@ module RSemantic
     def apply_transforms(vector_space_model)
       @transforms.each do |transform|
         begin
-          transform_class = Semantic::Transform.const_get(transform)
+          transform_class = RSemantic::Transform.const_get(transform)
           Semantic.logger.info("Applying #{transform} transform")
           transform_class.transform!(vector_space_model.matrix)
           Semantic.logger.info(vector_space_model)
