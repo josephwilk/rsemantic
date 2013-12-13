@@ -1,4 +1,4 @@
-module Semantic
+module RSemantic
   class Corpus
     # @return [Array<Document>]
     attr_reader :documents
@@ -30,7 +30,7 @@ module Semantic
     #
     # @return [void]
     def build_index
-      @search = Semantic::Search.new(@documents.map(&:text), @options)
+      @search = RSemantic::Search.new(@documents.map(&:text), @options)
     end
 
     def search(*words)
@@ -38,14 +38,14 @@ module Semantic
       results = @search.search(words)
       results.map.with_index { |result, index|
         document = @documents[index]
-        Semantic::SearchResult.new(document, result)
+        RSemantic::SearchResult.new(document, result)
       }.sort
     end
 
     def find_related_document(document)
       @search.related(@documents.index(document)).map.with_index { |result, index|
         document = @documents[index]
-        Semantic::SearchResult.new(document, result)
+        RSemantic::SearchResult.new(document, result)
       }.sort
     end
 

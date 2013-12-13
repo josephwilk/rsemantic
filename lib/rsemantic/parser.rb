@@ -1,6 +1,6 @@
 require "set"
 
-module Semantic
+module RSemantic
   class Parser
 
     def initialize(options = {})

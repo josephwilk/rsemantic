@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module Semantic
+module RSemantic
   describe Search do
 
     documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
@@ -93,7 +93,7 @@ module Semantic
 
       before(:each) do
         @out = StringIO.new
-        Semantic.logger = Logger.new(@out)
+        RSemantic.logger = Logger.new(@out)
       end
 
       it "should set info level if in verbose mode" do
@@ -102,7 +102,7 @@ module Semantic
 
         Search.new(['test'], :verbose => true)
         
-        Semantic.logger.level.should == Logger::INFO
+        RSemantic.logger.level.should == Logger::INFO
       end
       
       it "should set error level if not in verbose mode" do
@@ -111,7 +111,7 @@ module Semantic
 
         Search.new(['test'], :verbose => false)
         
-        Semantic.logger.level.should == Logger::ERROR
+        RSemantic.logger.level.should == Logger::ERROR
       end
 
       it "should default to error level if verbose is not specified" do
@@ -120,7 +120,7 @@ module Semantic
 
         Search.new(['test'])
         
-        Semantic.logger.level.should == Logger::ERROR
+        RSemantic.logger.level.should == Logger::ERROR
       end
 
     end

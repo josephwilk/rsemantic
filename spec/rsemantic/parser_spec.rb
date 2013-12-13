@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module Semantic
+module RSemantic
   describe Parser do
     it "should remove stop words based on locale" do
       file = mock "file"

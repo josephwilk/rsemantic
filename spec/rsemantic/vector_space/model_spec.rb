@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-module Semantic
+module RSemantic
   module VectorSpace
 
     describe Model do

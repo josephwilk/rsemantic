@@ -1,4 +1,4 @@
-module Semantic
+module RSemantic
   class Document
     attr_reader :text
     attr_reader :attributes
