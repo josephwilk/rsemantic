@@ -41,5 +41,17 @@ module RSemantic
       end
       ratings
     end
+
+    private
+
+    def marshal_dump
+      [@builder, @matrix_transformer, @vector_space_model.to_a]
+    end
+
+    def marshal_load(array)
+      @builder = array.shift
+      @matrix_transformer = array.shift
+      @vector_space_model = GSL::Matrix.alloc(*array.shift)
+    end
   end
 end
