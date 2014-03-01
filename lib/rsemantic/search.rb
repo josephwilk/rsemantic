@@ -11,7 +11,11 @@ module RSemantic
       RSemantic.logger.level = options[:verbose] ? Logger::INFO : Logger::ERROR
 
 
-      @builder = VectorSpace::Builder.new(:filter_stop_words => options[:filter_stop_words], :stem_words => options[:stem_words])
+      @builder = VectorSpace::Builder.new(
+	:filter_stop_words => options[:filter_stop_words],
+	:stem_words => options[:stem_words],
+	:locale => options[:locale]
+      )
       @matrix_transformer = MatrixTransformer.new(options[:transforms])
 
       @vector_space_model = @builder.build_document_matrix(documents)
