@@ -6,7 +6,10 @@ module RSemantic
     class Builder
 
       def initialize(options = {})
-        @parser = Parser.new(:filter_stop_words => options[:filter_stop_words])
+        @parser = Parser.new(
+          :filter_stop_words => options[:filter_stop_words],
+          :locale => options[:locale]
+        )
         @parsed_document_cache = []
       end
 
