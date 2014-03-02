@@ -42,7 +42,7 @@ module RSemantic
       ratings
     end
 
-    private
+    protected
 
     def marshal_dump
       [@builder, @matrix_transformer, @vector_space_model.to_a]
