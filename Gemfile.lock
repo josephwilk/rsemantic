@@ -1,5 +1,12 @@
+PATH
+  remote: .
+  specs:
+    rsemantic (0.2.2)
+      fast-stemmer
+      gsl
+
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     builder (3.2.0)
     cucumber (1.2.2)
@@ -37,8 +44,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  fast-stemmer
-  gsl
   limited_red
   rake
+  rsemantic!
   rspec
