@@ -1,5 +1,6 @@
 module RSemantic
   class Search
+    attr_reader :builder
 
     def initialize(documents, options = {})
       options = {
