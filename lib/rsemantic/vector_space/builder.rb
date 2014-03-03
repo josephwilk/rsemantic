@@ -4,6 +4,7 @@ module RSemantic
     # A document is represented as a vector. Each dimension of the vector corresponds to a
     # separate term. If a term occurs in the document, then the value in the vector is non-zero.
     class Builder
+      attr_reader :parsed_document_cache
 
       def initialize(options = {})
         @parser = Parser.new(

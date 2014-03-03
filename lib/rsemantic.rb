@@ -13,7 +13,6 @@ require "rsemantic/corpus"
 require "rsemantic/document"
 require "rsemantic/search_result"
 
-require 'rubygems'
 require 'gsl'
 
 require 'stemmer'

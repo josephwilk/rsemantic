@@ -28,7 +28,7 @@ module RSemantic
     def vector(vector)
       matrix([vector])
     end
-      
+
     describe "setting up" do
 
       it "should build the vector space" do
@@ -42,7 +42,7 @@ module RSemantic
         MatrixTransformer.stub!(:new).and_return(mock_matrix_transformer)
         VectorSpace::Builder.stub!(:new).and_return(mock_builder)
         mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
-        
+
         #FIXME: with will not match vector_space_model, requests class Data. Think this is related to Delegate and Rspec
         mock_matrix_transformer.should_receive(:apply_transforms).with(anything).and_return(vector_space_model)
 
@@ -73,7 +73,7 @@ module RSemantic
 
       it "should find related documents by comparing cosine" do
         VectorSpace::Builder.stub!(:new).and_return(mock_builder)
-      
+
         mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
 
         MatrixTransformer.stub!(:new).and_return(mock_matrix_transformer)
@@ -101,16 +101,16 @@ module RSemantic
         mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
 
         Search.new(['test'], :verbose => true)
-        
+
         RSemantic.logger.level.should == Logger::INFO
       end
-      
+
       it "should set error level if not in verbose mode" do
         VectorSpace::Builder.stub!(:new).and_return(mock_builder)
         mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
 
         Search.new(['test'], :verbose => false)
-        
+
         RSemantic.logger.level.should == Logger::ERROR
       end
 
@@ -119,11 +119,19 @@ module RSemantic
         mock_builder.stub!(:build_document_matrix).and_return(vector_space_model)
 
         Search.new(['test'])
-        
+
         RSemantic.logger.level.should == Logger::ERROR
       end
 
     end
 
+    describe "dumping" do
+      it "should dump and load correctly" do
+        search = Search.new(documents)
+        dump = Marshal.load(Marshal.dump(search))
+        search.search(['cat']).should == dump.search(['cat'])
+        search.search(['cat']).should_not == dump.search(['cats'])
+      end
+    end
   end
 end
