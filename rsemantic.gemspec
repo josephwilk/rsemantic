@@ -19,6 +19,6 @@ Gem::Specification.new do |s|
   s.rdoc_options     = ["--charset=UTF-8"]
   s.require_paths    = ["lib"]
 
-  s.add_runtime_dependency(%q<gsl>)
+  s.add_runtime_dependency(%q<rb-gsl>)
   s.add_runtime_dependency(%q<fast-stemmer>)
 end
