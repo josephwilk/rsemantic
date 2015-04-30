@@ -9,6 +9,7 @@ module RSemantic
       def initialize(options = {})
         @parser = Parser.new(
           :filter_stop_words => options[:filter_stop_words],
+          :stem_words => options[:stem_words],
           :locale => options[:locale]
         )
         @parsed_document_cache = []

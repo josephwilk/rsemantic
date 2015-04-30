@@ -44,7 +44,7 @@ module RSemantic
       words = string.split(" ")
 
       if @stem_words
-        words.map(&:stem)
+        words.map { |word| Stemmer::stem_word(word) }
       else
         words
       end
