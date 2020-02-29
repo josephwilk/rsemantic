@@ -3,7 +3,7 @@ PATH
   specs:
     rsemantic (0.2.2)
       fast-stemmer
-      gsl
+      rb-gsl
 
 GEM
   remote: https://rubygems.org/
@@ -18,8 +18,7 @@ GEM
     fast-stemmer (1.0.2)
     gherkin (2.11.6)
       json (>= 1.7.6)
-    gsl (1.15.3)
-      narray (>= 0.5.9)
+    gsl (2.1.0.3)
     httparty (0.8.1)
       multi_json
       multi_xml
@@ -29,8 +28,9 @@ GEM
       httparty (= 0.8.1)
     multi_json (1.6.1)
     multi_xml (0.5.3)
-    narray (0.6.0.8)
-    rake (10.0.3)
+    rake (13.0.1)
+    rb-gsl (1.16.0.6)
+      gsl
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
